@@ -7,24 +7,44 @@ public class QuickSort {
 
     public int[] sortArray(int[] nums){
 
-        nums = sort(nums,0 ,nums.length-1);
+        sort(nums,0 ,nums.length-1);
 
         return nums;
     }
 
-    public int[] sort(int[] nums,int start,int end){
+    public void sort(int[] nums,int start,int end){
+        if (start >= end){
+            return;
+        }
 
         int pivot = partition(nums,start,end);
-        sort(nums,start,pivot);
+        sort(nums,start,pivot-1);
         sort(nums,pivot+1,end);
-
-        return nums;
     }
+
 
     private int partition(int[] nums, int start, int end) {
         int pivot = nums[end];
-        
+        int left = start;
+        for (int right=start;right<end;right++){
 
-        return 0;
+            if (nums[right] < pivot){
+                if (left != right){
+                    swap(nums,left,right);
+                }
+                left++;
+            }
+        }
+        swap(nums,left,end);
+        return left;
     }
+
+
+    private void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+
+
 }
