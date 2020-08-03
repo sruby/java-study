@@ -20,7 +20,6 @@ public class StringUtil {
 	
 	/**
 	 * 将字符串用分隔符断裂成字符串列表
-	 * @author 肖明 2015-5-6
 	 * @param value 原字符串
 	 * @param separator 分隔字符
 	 * @return 结果列表
@@ -42,7 +41,6 @@ public class StringUtil {
 	 * 在不需要使用正则表达式时，用来代替String.split方法
 	 * 效率在String.split的3-4倍左右
 	 * 备注：String.split方法效率也还可以，如果不是在循环中使用，也可以忽略此方法
-	 * @author 肖明 2013-5-15
 	 * @param value 原字符串
 	 * @param separator 分隔字符
 	 * @return 结果数组
@@ -54,7 +52,6 @@ public class StringUtil {
 	
 	/**
 	 * 将数组用分隔符连接成新字符串(split的逆方法)
-	 * @author 肖明 2013-5-16
 	 * @param strs 字符串数组
 	 * @param sep 分隔符
 	 * @return 结果字符串
@@ -72,8 +69,7 @@ public class StringUtil {
 	 * @return String UUID 
 	 */ 
 	public static String getUUID() {
-		String str = UUID.randomUUID().toString();//标准的UUID格式为：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx(8-4-4-4-12)
-		//去掉"-"符号，不用replaceAll的原因与split一样，replaceAll支持正则表达式，频繁使用时效率不够高(当然偶尔用一下影响也不会特别严重)
+		String str = UUID.randomUUID().toString();
 		return join(split(str, "-"),"");
 	}
 	
