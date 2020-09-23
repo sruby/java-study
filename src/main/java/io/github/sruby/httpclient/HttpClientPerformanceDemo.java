@@ -10,8 +10,6 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * @date 2020/9/23 15:02
  */
@@ -23,7 +21,9 @@ public class HttpClientPerformanceDemo {
     public String wrong1() {
         CloseableHttpClient client = HttpClients.custom()
                 .setConnectionManager(new PoolingHttpClientConnectionManager())
-                .evictIdleConnections(60, TimeUnit.SECONDS).build();
+                //http-outgoing-0 << "Keep-Alive: timeout=60[\r][\n]"
+//                .evictIdleConnections(60, TimeUnit.SECONDS)
+                .build();
         try (CloseableHttpResponse response = client.execute(new HttpGet("http://127.0.0.1:45678/httpclientnotreuse/test"))) {
             return EntityUtils.toString(response.getEntity());
         } catch (Exception ex) {
@@ -33,8 +33,9 @@ public class HttpClientPerformanceDemo {
     }
 
     @GetMapping("/httpclientnotreuse/test")
-    public void test(){
+    public String test(){
         log.info("===========test=============");
+        return "test response";
     }
 
 }
