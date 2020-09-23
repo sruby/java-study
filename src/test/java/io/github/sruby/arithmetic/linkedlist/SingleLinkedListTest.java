@@ -1,12 +1,11 @@
 package io.github.sruby.arithmetic.linkedlist;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.math3.analysis.function.Sin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 @Slf4j
 public class SingleLinkedListTest {
