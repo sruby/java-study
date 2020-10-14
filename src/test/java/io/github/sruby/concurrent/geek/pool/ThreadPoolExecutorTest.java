@@ -1,5 +1,6 @@
 package io.github.sruby.concurrent.geek.pool;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
@@ -276,5 +277,11 @@ public class ThreadPoolExecutorTest {
 
             executor.submit(r);
         }
+    }
+
+    @Test
+    public  void newWithThreadFactoryBuilder(){
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(6, 10, 0,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<>(4), new ThreadFactoryBuilder().setNameFormat("$d").build(),new ThreadPoolExecutor.AbortPolicy());
     }
 }
