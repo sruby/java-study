@@ -8,6 +8,7 @@ import java.io.IOException;
  * @date 2020/10/13 15:36
  */
 public class JavaExecuteShellTest {
+    private static String pomPath = "C:\\Users\\1\\Documents\\javaStudy\\demo\\pom.xml";
 
     @Test
     public void execute() throws IOException, InterruptedException {
@@ -16,11 +17,19 @@ public class JavaExecuteShellTest {
 
     @Test
     public void executeCmd() throws Exception {
-        JavaExecuteShell.executeCmd();
+        String[] commands = {"mvn.cmd", "package", "-f", pomPath, "-Dmaven.test.skip=true"};
+        JavaExecuteShell.executeCmd(commands);
     }
 
     @Test
     public void executeCmdNoThread() throws Exception {
-        JavaExecuteShell.executeCmdNoThread();
+        String[] commands = {"mvn.cmd", "package", "-f", pomPath, "-Dmaven.test.skip=true"};
+        JavaExecuteShell.executeCmdNoThread(commands);
+    }
+
+    @Test
+    public void executeCmd_mavenTest() throws Exception {
+        String[] commands = {"mvn.cmd", "package", "-f", pomPath};
+        JavaExecuteShell.executeCmd(commands);
     }
 }

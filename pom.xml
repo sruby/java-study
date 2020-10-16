@@ -4,6 +4,7 @@
 
 	<groupId>io.github.sruby</groupId>
 	<artifactId>java-study</artifactId>
+	<packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<build>
 		<plugins>
@@ -31,5 +32,6 @@
 	</build>
 	<modules>
 		<module>java-basic</module>
+		<module>demo</module>
 	</modules>
 </project>

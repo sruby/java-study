@@ -16,11 +16,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class JavaExecuteShell {
+
     /**
      * execute cmd
+     * @param commands
      */
-    public static void executeCmd() throws Exception {
-        ProcessBuilder builder = new ProcessBuilder("mvn.cmd","package","-f","C:\\Users\\1\\Documents\\javaStudy\\pom.xml","-Dmaven.test.skip=true");
+    public static void executeCmd(String[] commands) throws Exception {
+        ProcessBuilder builder = new ProcessBuilder(commands);
         Process process = builder.start();
 
         StreamGobbler streamGobbler =
@@ -38,8 +40,8 @@ public class JavaExecuteShell {
     /**
      * execute cmd with no thread
      */
-    public static void executeCmdNoThread() throws Exception {
-        ProcessBuilder builder = new ProcessBuilder("mvn.cmd","package","-f","C:\\Users\\1\\Documents\\javaStudy\\pom.xml","-Dmaven.test.skip=true");
+    public static void executeCmdNoThread(String[] commands) throws Exception {
+        ProcessBuilder builder = new ProcessBuilder(commands);
         Process process = builder.start();
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));

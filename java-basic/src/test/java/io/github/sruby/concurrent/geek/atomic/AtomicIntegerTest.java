@@ -14,7 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class AtomicIntegerTest {
     private AtomicInteger atomicInteger = new AtomicInteger(1);
-    private AtomicInteger atomicInteger2;
 
     @Test
     public void getAndIncrement() throws InterruptedException {
@@ -39,10 +38,5 @@ public class AtomicIntegerTest {
         }
         TimeUnit.SECONDS.sleep(3);
         log.debug("atomicInteger:{}",atomicInteger);
-    }
-
-    @Test
-    public void test() {
-        log.info("atomicInteger2:{}",atomicInteger2.getAndIncrement());
     }
 }
