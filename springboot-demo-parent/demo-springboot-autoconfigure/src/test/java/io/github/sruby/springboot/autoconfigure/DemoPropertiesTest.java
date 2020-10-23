@@ -6,8 +6,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.io.IOException;
 
-import static jdk.nashorn.internal.objects.Global.load;
-
 
 /**
  * @date 2020/10/19 17:08
@@ -19,7 +17,7 @@ class DemoPropertiesTest {
 
     @Test
     public void test() throws IOException {
-        load(DemoProperties.class, "demo.name=foo");
+//        load(DemoProperties.class, "demo.name=foo");
     }
 
 }
