@@ -1,6 +1,6 @@
 package io.github.sruby.springboot.demo.postprocessor;
 
-import io.github.sruby.springboot.demo.service.ISpringServbice;
+import io.github.sruby.springboot.demo.service.ISpringService;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -17,7 +17,7 @@ public class ManualApplyPostProcessorService {
         postProcessor.setLocations(new ClassPathResource("postprocessor\\pro.properties"));
         postProcessor.setBeanFactory(beanFactory);
 
-        ISpringServbice iSpringServbice = (ISpringServbice) beanFactory.getBean("SpringServbice");
-        iSpringServbice.out();
+        ISpringService iSpringService = (ISpringService) beanFactory.getBean("ISpringService");
+        iSpringService.out();
     }
 }

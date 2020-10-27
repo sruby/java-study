@@ -1,7 +1,7 @@
 package io.github.sruby.springboot.demo.beanfacroty;
 
-import io.github.sruby.springboot.demo.service.ISpringServbice;
-import io.github.sruby.springboot.demo.service.impl.SpringServbiceImpl;
+import io.github.sruby.springboot.demo.service.ISpringService;
+import io.github.sruby.springboot.demo.service.impl.SpringServiceImpl;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -12,11 +12,11 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
  */
 public class BindBeanToBeanFacroty {
     public static void main(String[] args) {
-        AbstractBeanDefinition serBeanDefinition = new RootBeanDefinition(SpringServbiceImpl.class);
+        AbstractBeanDefinition serBeanDefinition = new RootBeanDefinition(SpringServiceImpl.class);
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
         beanFactory.registerBeanDefinition("iSpringServbiceImpl",serBeanDefinition);
 
-        ISpringServbice iSpringServbiceImpl = (ISpringServbice) beanFactory.getBean("iSpringServbiceImpl");
-        iSpringServbiceImpl.out();
+        ISpringService iSpringServiceImpl = (ISpringService) beanFactory.getBean("iSpringServbiceImpl");
+        iSpringServiceImpl.out();
     }
 }
