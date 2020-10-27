@@ -35,6 +35,5 @@
 		<module>demo</module>
 		<module>rocketmq-demo</module>
 		<module>springboot-demo-parent</module>
-		<module>demo-sdk</module>
 	</modules>
 </project>
