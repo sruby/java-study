@@ -1,4 +1,4 @@
-package io.github.sruby.springboot.demo.postprocessor;
+package io.github.sruby.springboot.demo.beanfactorypostprocessor;
 
 import io.github.sruby.springboot.demo.service.ISpringService;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -13,11 +13,13 @@ public class ManualApplyPostProcessorService {
 
     public static void main(String[] args) {
         ConfigurableListableBeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("postprocessor\\beans.xml"));
+        //PropertyPlaceholderConfigurer is implemented BeanFactoryPostProcessor
         PropertyPlaceholderConfigurer postProcessor = new PropertyPlaceholderConfigurer();
         postProcessor.setLocations(new ClassPathResource("postprocessor\\pro.properties"));
         postProcessor.setBeanFactory(beanFactory);
 
-        ISpringService iSpringService = (ISpringService) beanFactory.getBean("ISpringService");
+        //TODO why cant read value of "postprocessor.key" in "postprocessor\\pro.properties"
+        ISpringService iSpringService = (ISpringService) beanFactory.getBean("springService");
         iSpringService.out();
     }
 }

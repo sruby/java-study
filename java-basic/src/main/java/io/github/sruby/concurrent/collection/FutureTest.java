@@ -16,35 +16,30 @@ public class FutureTest
 			@Override
 			public boolean isDone()
 			{
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public boolean isCancelled()
 			{
-				// TODO Auto-generated method stub
 				return false;
 			}
 			
 			@Override
 			public String get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException
 			{
-				// TODO Auto-generated method stub
 				return null;
 			}
 			
 			@Override
 			public String get() throws InterruptedException, ExecutionException
 			{
-				// TODO Auto-generated method stub
 				return null;
 			}
 			
 			@Override
 			public boolean cancel(boolean mayInterruptIfRunning)
 			{
-				// TODO Auto-generated method stub
 				return false;
 			}
 		};

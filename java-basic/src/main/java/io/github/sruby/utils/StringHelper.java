@@ -1,13 +1,13 @@
 package io.github.sruby.utils;
 
+import org.apache.log4j.Logger;
+
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.log4j.Logger;
 
 public final class StringHelper
 {
@@ -1372,7 +1372,6 @@ public final class StringHelper
 	
 	/**
 	 * 货币缩写,提供亿和万两个单位，并精确到小数点2位
-	 * TODO:切换到新的算法:对数算法
 	 * @param original
 	 * @return
 	 */
