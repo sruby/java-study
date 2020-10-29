@@ -1,4 +1,4 @@
-package io.github.sruby.springboot.demo.applicationcontext.event;
+package io.github.sruby.springboot.demo.event.java;
 
 import java.util.EventObject;
 

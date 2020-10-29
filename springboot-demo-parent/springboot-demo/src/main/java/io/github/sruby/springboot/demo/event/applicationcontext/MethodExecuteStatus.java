@@ -1,4 +1,4 @@
-package io.github.sruby.springboot.demo.applicationcontext.event;
+package io.github.sruby.springboot.demo.event.applicationcontext;
 
 /**
  * @author sruby on 2020-10-28 21:49

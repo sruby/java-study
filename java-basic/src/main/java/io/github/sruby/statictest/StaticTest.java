@@ -1,9 +1,8 @@
 package io.github.sruby.statictest;
 
 /**
- * ²âÊÔÀàµÄ³õÊ¼»¯Ë³Ðò:
- * ¸¸Àà¾²Ì¬´úÂë¿é-¡·×ÓÀà¾²Ì¬´úÂë¿é-¡·¸¸Àà´úÂë¿é-¡·¸¸Àà¹¹Ôìº¯Êý-¡·×ÓÀà´úÂë¿é-¡·×ÓÀà¹¹Ôìº¯Êý
- * @author liuwf on 2016Äê12ÔÂ26ÈÕ ÏÂÎç8:26:39
+ * æµ‹è¯•ç±»çš„åˆå§‹åŒ–é¡ºåº:
+ * çˆ¶ç±»é™æ€ä»£ç å—-ã€‹å­ç±»é™æ€ä»£ç å—-ã€‹çˆ¶ç±»ä»£ç å—-ã€‹çˆ¶ç±»æž„é€ å‡½æ•°-ã€‹å­ç±»ä»£ç å—-ã€‹å­ç±»æž„é€ å‡½æ•°
  */
 public class StaticTest
 {
