@@ -1,16 +1,15 @@
 package io.github.sruby.springboot.demo.event.applicationcontext;
 
 import org.springframework.context.ApplicationEvent;
-import org.springframework.stereotype.Component;
 
 /**
  * event
  * @author sruby on 2020-10-28 21:18
  */
-@Component
 public class MethodExecutionEvent extends ApplicationEvent {
     private String method;
     private MethodExecuteStatus methodExecuteStatus;
+
     /**
      * Constructs a prototypical Event.
      *
