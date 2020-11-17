@@ -1,8 +1,10 @@
 package io.github.sruby.annotation.demo;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 @Data
+@SuperBuilder
 public class Person
 {
 	@Name("阿特罗伯斯")
