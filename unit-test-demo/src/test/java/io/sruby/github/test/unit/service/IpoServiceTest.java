@@ -13,11 +13,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+//@Transactional
 class IpoServiceTest {
     @Mock
     CompanyService companyService;
     @InjectMocks
     IpoService ipoService;
+//    @Spy
+//    IpoMapper ipoMapper;
 
     @BeforeEach
     void setUp() {
@@ -28,11 +31,18 @@ class IpoServiceTest {
     void testGet() {
         String code = "8888";
         String companyId = "00001";
-        when(companyService.get(companyId)).thenReturn(new Company(companyId, code+"_Company"));
+        when(companyService.get(companyId)).thenReturn(new Company(1,companyId, code+"_Company"));
 
         IpoDTO result = ipoService.get(code,companyId);
         Assertions.assertEquals(new IpoDTO(code, companyId, code+"_Company"), result);
     }
+
+//    @Test
+//    public void testInsert(){
+//        ipoService.insert(IPO.builder().id(1).code("111").companyId("8888").build());
+//    }
+
+
 }
 
 //Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Company {
+    private Integer id;
     private String companyId;
     private String companyName;
 }

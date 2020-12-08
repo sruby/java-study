@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IPO {
+public class Ipo {
+    private Integer id;
     private String code;
     private String companyId;
 }

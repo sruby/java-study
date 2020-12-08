@@ -2,7 +2,8 @@ package io.sruby.github.test.unit.service;
 
 import io.sruby.github.test.unit.dto.IpoDTO;
 import io.sruby.github.test.unit.entity.Company;
-import io.sruby.github.test.unit.entity.IPO;
+import io.sruby.github.test.unit.entity.Ipo;
+import io.sruby.github.test.unit.mapper.IpoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,17 @@ import org.springframework.stereotype.Service;
 public class IpoService {
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private IpoMapper ipoMapper;
 
     public IpoDTO get(String code,String companyId){
-        IPO ipo = IPO.builder().code(code).companyId(companyId).build();
+        Ipo ipo = Ipo.builder().code(code).companyId(companyId).build();
         Company company = companyService.get(companyId);
         IpoDTO ipoDTO = IpoDTO.builder().code(code).companyId(companyId).companyName(company.getCompanyName()).build();
         return ipoDTO;
+    }
+
+    public int insert(Ipo ipo){
+        return ipoMapper.insert(ipo);
     }
 }
