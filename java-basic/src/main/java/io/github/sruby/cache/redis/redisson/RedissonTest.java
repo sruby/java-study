@@ -48,6 +48,12 @@ public class RedissonTest {
     }
 
     @Test
+    public void testLock(){
+        RLock testLock = redisson.getLock("testLock");
+        testLock.lock(10,TimeUnit.MINUTES);
+    }
+
+    @Test
     public void testRLock_oneMainThread() throws InterruptedException {
         ExecutorService service = Executors.newCachedThreadPool();
         service.execute(
