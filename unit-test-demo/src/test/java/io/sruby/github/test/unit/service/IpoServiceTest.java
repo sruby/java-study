@@ -38,7 +38,7 @@ class IpoServiceTest {
 
     @Test
     public void testInsert(){
-        ipoService.insert(Ipo.builder().id(1).code("111").companyId("8888").build());
+        ipoService.insert(Ipo.builder().id(111).code("111").companyId("8888").build());
     }
 
 

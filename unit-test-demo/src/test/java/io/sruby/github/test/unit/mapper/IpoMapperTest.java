@@ -18,7 +18,7 @@ class IpoMapperTest {
     @Test
     @Transactional
     public void test_Transactional_Callback(){
-        ipoMapper.insert(Ipo.builder().id(2).code("22").companyId("8881").build());
+        ipoMapper.insert(Ipo.builder().id(20).code("22").companyId("8881").build());
     }
 
 }
