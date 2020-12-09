@@ -4,27 +4,25 @@ import io.sruby.github.test.unit.dto.IpoDTO;
 import io.sruby.github.test.unit.entity.Company;
 import io.sruby.github.test.unit.entity.Ipo;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.mockito.Mockito.when;
 
+@ActiveProfiles("test")
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-//@Transactional
-class IpoServiceTest {
-    @Mock
+@Transactional
+class IpoServiceMockInSpringTest {
+    @Autowired
     CompanyService companyService;
-    @InjectMocks
+    @Autowired
     IpoService ipoService;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     void testGet() {
@@ -38,7 +36,7 @@ class IpoServiceTest {
 
     @Test
     public void testInsert(){
-        ipoService.insert(Ipo.builder().id(1).code("111").companyId("8888").build());
+        ipoService.insert(Ipo.builder().id(4).code("111").companyId("8888").build());
     }
 
 

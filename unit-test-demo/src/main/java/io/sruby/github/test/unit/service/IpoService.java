@@ -19,7 +19,7 @@ public class IpoService {
     @Autowired
     private IpoMapper ipoMapper;
 
-    public IpoDTO get(String code,String companyId){
+    public IpoDTO get(String code, String companyId){
         Ipo ipo = Ipo.builder().code(code).companyId(companyId).build();
         Company company = companyService.get(companyId);
         IpoDTO ipoDTO = IpoDTO.builder().code(code).companyId(companyId).companyName(company.getCompanyName()).build();
