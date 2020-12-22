@@ -21,4 +21,9 @@ public class StringUtilTest {
         Assertions.assertFalse(StringUtils.isEmpty("not empty"));
     }
 
+    @Test
+    public void test(){
+
+    }
+
 }
