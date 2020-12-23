@@ -21,12 +21,12 @@ public class Account {
      * @param amount
      * @throws AccountLockedException
      */
-    public void deposit(int amount) throws AccountLockedException, InvalidAccountException {
+    public void deposit(int amount) throws AccountLockedException, InvalidAmountException {
         if (locked){
             throw new AccountLockedException("account locked!");
         }
-        if (balance < 0){
-            throw new InvalidAccountException("balance less 0!");
+        if (amount < 0){
+            throw new InvalidAmountException("balance less 0!");
         }
         balance += amount;
         transactions.add(this,TransactionType.DEBIT,amount);
@@ -36,12 +36,12 @@ public class Account {
      * withdraw
      * @param amount
      */
-    public void withdraw(int amount) throws AccountLockedException, InvalidAccountException {
+    public void withdraw(int amount) throws AccountLockedException, InvalidAmountException {
         if (locked){
             throw new AccountLockedException("account locked!");
         }
-        if (balance < 0){
-            throw new InvalidAccountException("balance less 0!");
+        if (amount < 0){
+            throw new InvalidAmountException("balance less 0!");
         }
         if (amount > balance){
             throw new InvalidParameterException("amount more balance");
