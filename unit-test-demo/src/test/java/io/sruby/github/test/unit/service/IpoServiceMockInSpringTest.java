@@ -1,7 +1,7 @@
 package io.sruby.github.test.unit.service;
 
 import io.sruby.github.test.unit.dto.IpoDTO;
-import io.sruby.github.test.unit.entity.Company;
+import io.sruby.github.test.unit.entity.IpoCompany;
 import io.sruby.github.test.unit.entity.Ipo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 @Transactional
 class IpoServiceMockInSpringTest {
     @Autowired
-    CompanyService companyService;
+    IpoCompanyService ipoCompanyService;
     @Autowired
     IpoService ipoService;
 
@@ -28,7 +28,7 @@ class IpoServiceMockInSpringTest {
     void testGet() {
         String code = "8888";
         String companyId = "00001";
-        when(companyService.get(companyId)).thenReturn(new Company(1,companyId, code+"_Company"));
+        when(ipoCompanyService.get(companyId)).thenReturn(new IpoCompany(1,companyId, code+"_Company"));
 
         IpoDTO result = ipoService.get(code,companyId);
         Assertions.assertEquals(new IpoDTO(code, companyId, code+"_Company"), result);

@@ -1,17 +1,19 @@
 package io.sruby.github.test.unit.service;
 
 import io.sruby.github.test.unit.dto.IpoDTO;
-import io.sruby.github.test.unit.entity.Company;
 import io.sruby.github.test.unit.entity.Ipo;
+import io.sruby.github.test.unit.entity.IpoCompany;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 //@ActiveProfiles("test")
@@ -20,15 +22,15 @@ import static org.mockito.Mockito.when;
 @Transactional
 class IpoServiceMockInSpringTest2 {
     @MockBean
-    CompanyService companyService;
-    @Autowired
+    IpoCompanyService ipoCompanyService;
+    @SpyBean
     IpoService ipoService;
 
     @Test
     void testGet() {
         String code = "8888";
         String companyId = "00001";
-        when(companyService.get(companyId)).thenReturn(new Company(1,companyId, code+"_Company"));
+        when(ipoCompanyService.get(companyId)).thenReturn(new IpoCompany(1,companyId, code+"_Company"));
 
         IpoDTO result = ipoService.get(code,companyId);
         Assertions.assertEquals(new IpoDTO(code, companyId, code+"_Company"), result);
@@ -39,6 +41,15 @@ class IpoServiceMockInSpringTest2 {
         ipoService.insert(Ipo.builder().id(4).code("111").companyId("8888").build());
     }
 
+    @Test
+    public void test(){
+        int id = 1;
+        when(ipoService.get(id)).thenReturn(Ipo.builder().id(1).code("111").companyId("8888").build());
+        Ipo ipo = ipoService.getIpoWithBusinuss(id);
+        assertThat(ObjectUtils.isEmpty(ipo)).isFalse();
+        assertThat(ipo.getId()).isEqualTo(id);
+        assertThat(ipo.getCode()).startsWith("Businuss");
+    }
 
 }
 
