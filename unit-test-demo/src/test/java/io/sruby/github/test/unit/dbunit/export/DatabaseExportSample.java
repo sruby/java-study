@@ -1,4 +1,4 @@
-package io.sruby.github.test.unit.dbutil.export;
+package io.sruby.github.test.unit.dbunit.export;
 
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.DatabaseConnection;
@@ -46,8 +46,8 @@ public class DatabaseExportSample
         // partial database export
         QueryDataSet partialDataSet = new QueryDataSet(connection);
         partialDataSet.addTable("ipo", "SELECT * FROM ipo WHERE company_id='888'");
-        partialDataSet.addTable("company");
-        FlatXmlDataSet.write(partialDataSet, new FileOutputStream("io.sruby.github.test.unit.dbutil/partial.xml"));
+//        partialDataSet.addTable("company");
+        FlatXmlDataSet.write(partialDataSet, new FileOutputStream("partial.xml"));
     }
 
     @Test

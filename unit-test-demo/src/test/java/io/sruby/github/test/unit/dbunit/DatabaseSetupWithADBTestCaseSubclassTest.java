@@ -1,4 +1,4 @@
-package io.sruby.github.test.unit.dbutil;
+package io.sruby.github.test.unit.dbunit;
 
 /**
  * @description: test

@@ -1,4 +1,4 @@
-package io.sruby.github.test.unit.dbutil.export;
+package io.sruby.github.test.unit.dbunit.export;
 
 import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;

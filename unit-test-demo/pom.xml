@@ -77,6 +77,12 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.196</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-spring</artifactId>
+			<version>1.21.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -85,14 +91,14 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
 				<configuration>
-					<skip>${maven.test.skip}</skip>
+					<!--<skip>${maven.test.skip}</skip>-->
 					<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 					<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
 					<output>file</output>
 					<append>true</append>
-					<excludes>
+					<!--<excludes>
 						<exclude>*MethodAccess</exclude>
-					</excludes>
+					</excludes>-->
 				</configuration>
 				<executions>
 					<execution>

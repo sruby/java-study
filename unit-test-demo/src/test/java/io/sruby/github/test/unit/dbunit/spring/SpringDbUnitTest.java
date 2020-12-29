@@ -1,18 +1,18 @@
-package io.sruby.github.test.unit.dbutil;
+package io.sruby.github.test.unit.dbunit.spring;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseSetups;
 import io.sruby.github.test.unit.entity.Ipo;
 import io.sruby.github.test.unit.service.IpoService;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
@@ -24,12 +24,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author: sruby
  * @create: 2020-12-25 11:36
  */
-@DatabaseSetup("/partial.xml")
+//@DatabaseSetup("/partial.xml")
+//@DatabaseSetup("/partial2.xml")
+@DatabaseSetups({
+    @DatabaseSetup("/partial.xml"),
+    @DatabaseSetup("/partial2.xml")
+})
 //@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
 @TestExecutionListeners({
-        TransactionalTestExecutionListener.class,
+        TransactionDbUnitTestExecutionListener.class,
         DependencyInjectionTestExecutionListener.class,
         DbUnitTestExecutionListener.class
 })
@@ -41,10 +46,9 @@ public class SpringDbUnitTest {
     @Autowired
     IpoService ipoService;
 
-//    @DatabaseSetup("partial.xml")
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
+//    @DatabaseSetup("/partial.xml")
+    @BeforeAll
+    static void setUp() {
     }
 
 
