@@ -1,11 +1,18 @@
 package io.github.sruby.bean;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
+
 import java.util.Date;
 
 /**
  * 雇员实体类
  * @author sruby on 2016年8月14日 下午11:22:19
  */
+@Data
+@Accessors(chain = true)
+@SuperBuilder
 public class Employee implements Cloneable
 {
 	private String name;
