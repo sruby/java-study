@@ -32,7 +32,6 @@
 	</build>
 	<modules>
 		<module>java-basic</module>
-		<module>demo</module>
 		<module>rocketmq-demo</module>
 		<module>springboot-demo-parent</module>
 	</modules>
