@@ -12,7 +12,7 @@ class IpoMapperTest {
     private  IpoMapper ipoMapper;
     @Test
     public void testInsert(){
-        ipoMapper.insert(Ipo.builder().id(1).code("11").companyId("888").build());
+//        ipoMapper.insert(Ipo.builder().id(1).code("11").companyId("888").build());
     }
 
     @Test

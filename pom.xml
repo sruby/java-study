@@ -34,5 +34,6 @@
 		<module>java-basic</module>
 		<module>rocketmq-demo</module>
 		<module>springboot-demo-parent</module>
+		<module>jacoco-demo</module>
 	</modules>
 </project>

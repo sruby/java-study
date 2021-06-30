@@ -1,24 +1,22 @@
 package io.sruby.github.test.unit.service;
 
 import io.sruby.github.test.unit.dto.IpoDTO;
-import io.sruby.github.test.unit.entity.IpoCompany;
 import io.sruby.github.test.unit.entity.Ipo;
+import io.sruby.github.test.unit.entity.IpoCompany;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
-@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
-class IpoServiceMockInSpringTest {
+public class IpoServiceMockInSpringTest {
     @Autowired
     IpoCompanyService ipoCompanyService;
     @Autowired

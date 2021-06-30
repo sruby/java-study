@@ -38,6 +38,7 @@ public class IpoService {
 
 
     public int insert(Ipo ipo){
-        return ipoMapper.insert(ipo);
+//        return ipoMapper.insert(ipo);
+        return 0;
     }
 }
