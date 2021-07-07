@@ -20,5 +20,6 @@
         <module>demo-springboot-autoconfigure</module>
         <module>demo-sdk</module>
         <module>springboot-kafka-demo</module>
+        <module>resiliency4j-demo</module>
     </modules>
 </project>

@@ -1,0 +1,173 @@
+spring:
+    application.name: resilience4j-demo
+    jackson.serialization.indent_output: true
+
+server:
+    port: 9080
+
+management.endpoints.web.exposure.include: '*'
+management.endpoint.health.show-details: always
+
+management.health.diskspace.enabled: false
+management.health.circuitbreakers.enabled: true
+management.health.ratelimiters.enabled: false
+
+info:
+    name: ${spring.application.name}
+    description: resilience4j demo
+    environment: ${spring.profiles.active}
+    version: 0.0.1
+
+management.metrics.tags.application: ${spring.application.name}
+management.metrics.distribution.percentiles-histogram.http.server.requests: true
+management.metrics.distribution.percentiles-histogram.resilience4j.circuitbreaker.calls: true
+
+#resilience4j.circuitbreaker.metrics.use_legacy_binder: true
+
+resilience4j.circuitbreaker:
+    configs:
+        default:
+#
+            registerHealthIndicator: true
+#            [resiliency4j]Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed.
+            slidingWindowSize: 100
+#            [resiliency4j]Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate or slow call rate.
+#            For example, if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated.
+#            If only 9 calls have been recorded the CircuitBreaker will not transition to open even if all 9 calls have failed.
+            minimumNumberOfCalls: 100
+#            [resiliency4j]The time that the CircuitBreaker should wait before transitioning from open to half-open.
+            waitDurationInOpenState: 6000
+#           [resiliency4j]Configures the number of permitted calls when the CircuitBreaker is half open.
+            permittedNumberOfCallsInHalfOpenState: 10
+#           [resiliency4j]If set to true it means that the CircuitBreaker will automatically transition from open to half-open state
+#    and no call is needed to trigger the transition. A thread is created to monitor all the instances of CircuitBreakers to transition
+#    them to HALF_OPEN once waitDurationInOpenState passes. Whereas, if set to false the transition to HALF_OPEN only happens if a call is made,
+#    even after waitDurationInOpenState is passed. The advantage here is no thread monitors the state of all CircuitBreakers.
+            automaticTransitionFromOpenToHalfOpenEnabled: false
+#            [resiliency4j]请求调用失败的阈值，百分比。默认是50%
+#            Configures the failure rate threshold in percentage.
+#            When the failure rate is equal or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls.
+            failureRateThreshold: 50
+#            [resiliency4j]Configures a threshold in percentage. The CircuitBreaker considers a call as slow when the call duration is greater than slowCallDurationThreshold
+#            When the percentage of slow calls is equal or greater the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls.
+            slowCallRateThreshold: 100
+#          [resiliency4j]Configures the duration threshold above which calls are considered as slow and increase the rate of slow calls.
+            slowCallDurationThreshold: 6000
+#            [resiliency4j]Configures a maximum wait duration which controls the longest amount of time a CircuitBreaker could stay in Half Open state, before it switches to open.
+#            Value 0 means Circuit Breaker would wait infinitely in HalfOpen State until all permitted calls have been completed.
+            maxWaitDurationInHalfOpenState: 0
+#            [resiliency4j]Configures the type of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed.
+#            Sliding window can either be count-based or time-based.
+#            If the sliding window is COUNT_BASED, the last slidingWindowSize calls are recorded and aggregated.
+#            If the sliding window is TIME_BASED, the calls of the last slidingWindowSize seconds recorded and aggregated.
+            slidingWindowType: COUNT_BASED
+            eventConsumerBufferSize: 10
+#            [resiliency4j]A list of exceptions that are recorded as a failure and thus increase the failure rate.
+#            Any exception matching or inheriting from one of the list counts as a failure, unless explicitly ignored via ignoreExceptions.
+#            If you specify a list of exceptions, all other exceptions count as a success, unless they are explicitly ignored by ignoreExceptions.
+            recordExceptions:
+#                记录系统异常
+                - org.springframework.web.client.HttpServerErrorException
+                - java.util.concurrent.TimeoutException
+                - java.io.IOException
+#            [resiliency4j]A list of exceptions that are ignored and neither count as a failure nor success.
+#            Any exception matching or inheriting from one of the list will not count as a failure nor success, even if the exceptions is part of recordExceptions.
+            ignoreExceptions:
+#                忽略业务异常
+                - io.github.robwin.exception.BusinessException
+#        可以在其他instance下通过baseConfig引用
+        shared:
+#            [resiliency4j]Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed.
+            slidingWindowSize: 100
+#            [resiliency4j]Configures the number of permitted calls when the CircuitBreaker is half open.
+            permittedNumberOfCallsInHalfOpenState: 10
+#            熔断器在打开状态时的持续时间。默认是60秒
+#            [resiliency4j]The time that the CircuitBreaker should wait before transitioning from open to half-open.
+            waitDurationInOpenState: 1s
+
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            ignoreExceptions:
+                - io.github.robwin.exception.BusinessException
+    instances:
+        backendA:
+            baseConfig: default
+        backendB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            minimumNumberOfCalls: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            waitDurationInOpenState: 5s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+#            是否记录请求调用失败的断言，默认所有异常都记录，此处的实现类排除了业务一行类
+            recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+        backendC:
+            baseConfig: shared
+resilience4j.retry:
+    configs:
+        default:
+            maxRetryAttempts: 3
+            waitDuration: 100
+            retryExceptions:
+                - org.springframework.web.client.HttpServerErrorException
+                - java.util.concurrent.TimeoutException
+                - java.io.IOException
+            ignoreExceptions:
+                - io.github.robwin.exception.BusinessException
+    instances:
+        backendA:
+            baseConfig: default
+        backendB:
+            baseConfig: default
+resilience4j.bulkhead:
+    configs:
+        default:
+            maxConcurrentCalls: 100
+    instances:
+        backendA:
+            maxConcurrentCalls: 10
+        backendB:
+            maxWaitDuration: 10ms
+            maxConcurrentCalls: 20
+
+resilience4j.thread-pool-bulkhead:
+    configs:
+        default:
+            maxThreadPoolSize: 4
+            coreThreadPoolSize: 2
+            queueCapacity: 2
+    instances:
+        backendA:
+            baseConfig: default
+        backendB:
+            maxThreadPoolSize: 1
+            coreThreadPoolSize: 1
+            queueCapacity: 1
+
+resilience4j.ratelimiter:
+    configs:
+        default:
+            registerHealthIndicator: false
+            limitForPeriod: 10
+            limitRefreshPeriod: 1s
+            timeoutDuration: 0
+            eventConsumerBufferSize: 100
+    instances:
+        backendA:
+            baseConfig: default
+        backendB:
+            limitForPeriod: 6
+            limitRefreshPeriod: 500ms
+            timeoutDuration: 3s
+            
+resilience4j.timelimiter:
+    configs:
+        default:
+            cancelRunningFuture: false
+            timeoutDuration: 2s
+    instances:
+        backendA:
+            baseConfig: default
+        backendB:
+            baseConfig: default

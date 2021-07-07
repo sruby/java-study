@@ -7,11 +7,10 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @Configuration
-@EnableSwagger2
+//@EnableSwagger2
 @EnableSwagger2WebMvc
 public class Knife4jConfiguration {
 
@@ -22,7 +21,7 @@ public class Knife4jConfiguration {
                         //.title("swagger-bootstrap-ui-demo RESTful APIs")
                         .description("# swagger-bootstrap-ui-demo RESTful APIs")
                         .termsOfServiceUrl("http://www.xx.com/")
-                        .contact(null)
+//                        .contact(null)
                         .version("1.0")
                         .build())
                 //分组名称
