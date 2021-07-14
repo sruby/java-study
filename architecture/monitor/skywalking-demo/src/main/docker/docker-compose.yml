@@ -1,0 +1,19 @@
+version: '3'
+services:
+  skywalking-demo:
+    image: sruby/skywalking-demo:latest
+    container_name: skywalking-demo
+    restart: always
+#    共用宿主机网络
+#    networks:
+#      - host
+#      共用宿主机网络后不用做端口映射
+    ports:
+      - 8079:8079
+    env_file: .env
+    environment:
+      TZ: Asia/Shanghai
+
+#networks:
+#  sc-net:
+#    external: false
