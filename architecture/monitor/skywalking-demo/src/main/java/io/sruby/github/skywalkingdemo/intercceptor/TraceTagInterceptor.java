@@ -15,9 +15,9 @@ public class TraceTagInterceptor implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
-    @Trace(operationName = "traceTagPreHandle")
+    @Trace(operationName = "stockCodeSpan")
     @Tag(key = "tag.demo.a",value = "1")
-    @Tag(key = "tag.demo",value = "arg[0]")
+    @Tag(key = "stock_code",value = "arg[0].parameterMap.")
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         logger.info("[preHandle][handler({})]", handler);
         return true;
