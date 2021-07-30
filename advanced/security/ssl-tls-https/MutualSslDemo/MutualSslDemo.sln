@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyClient", "MyClient\MyClient.csproj", "{3BC4702F-8527-480C-BC57-8D545E71D21F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyServer", "MyServer\MyServer.csproj", "{CF2A5C56-0BC5-4114-8002-52488D75CACB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certificates", "Certificates", "{EDC07A44-A6EB-4405-B6CE-BBE2FD4B7FF1}"
+	ProjectSection(SolutionItems) = preProject
+		Certificates\MyClient.cer = Certificates\MyClient.cer
+		Certificates\MyClient.pfx = Certificates\MyClient.pfx
+		Certificates\MyClient.pvk = Certificates\MyClient.pvk
+		Certificates\MyClient.spc = Certificates\MyClient.spc
+		Certificates\MyServer.cer = Certificates\MyServer.cer
+		Certificates\MyServer.pfx = Certificates\MyServer.pfx
+		Certificates\MyServer.pvk = Certificates\MyServer.pvk
+		Certificates\MyServer.spc = Certificates\MyServer.spc
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BC4702F-8527-480C-BC57-8D545E71D21F}.Debug|x86.ActiveCfg = Debug|x86
+		{3BC4702F-8527-480C-BC57-8D545E71D21F}.Debug|x86.Build.0 = Debug|x86
+		{3BC4702F-8527-480C-BC57-8D545E71D21F}.Release|x86.ActiveCfg = Release|x86
+		{3BC4702F-8527-480C-BC57-8D545E71D21F}.Release|x86.Build.0 = Release|x86
+		{CF2A5C56-0BC5-4114-8002-52488D75CACB}.Debug|x86.ActiveCfg = Debug|x86
+		{CF2A5C56-0BC5-4114-8002-52488D75CACB}.Debug|x86.Build.0 = Debug|x86
+		{CF2A5C56-0BC5-4114-8002-52488D75CACB}.Release|x86.ActiveCfg = Release|x86
+		{CF2A5C56-0BC5-4114-8002-52488D75CACB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

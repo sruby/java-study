@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-secret: mtls/mtls-certs
+  name: mtls-ingress
+spec:
+  rules:
+  - host: "*.test"
+    http:
+      paths:
+      - backend:
+          serviceName: mtls-service
+          servicePort: 5678
+        path: /
+  tls:
+  - hosts:
+    - "*.test"
+    secretName: mtls-certs
