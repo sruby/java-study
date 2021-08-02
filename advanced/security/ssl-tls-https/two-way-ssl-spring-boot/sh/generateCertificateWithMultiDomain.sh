@@ -54,5 +54,7 @@ echo "build"
 mvn compile -f ../nt-gateway/pom.xml
 mvn compile -f ../nt-ms/pom.xml
 
+openssl req -in client.csr -noout -text
+
 #test
 #curl -k --cacert ./ca.crt --key ./client.key --cert ./client.crt https://127.0.0.1:9001/nt-gw/ms-data

@@ -7,12 +7,12 @@ server:
   ssl:
     enabled: true
     client-auth: need
-    key-store: classpath:client.keystore
+    key-store: /Users/macuser/IdeaProjects/java-study/advanced/security/ssl-tls-https/two-way-ssl-spring-boot/sh/client.keystore
     key-store-password: 123456
 #    key-alias: client
     key-store-type: PKCS12
 #    key-store-provider: SUN
-    trust-store: classpath:ca.truststore
+    trust-store: /Users/macuser/IdeaProjects/java-study/advanced/security/ssl-tls-https/two-way-ssl-spring-boot/sh/ca.truststore
     trust-store-password: 123456
     trust-store-type: JKS
 ---

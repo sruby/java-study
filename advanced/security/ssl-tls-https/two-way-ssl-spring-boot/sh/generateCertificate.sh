@@ -8,7 +8,7 @@ openssl genrsa -out ca.key 2048
 openssl req -new -x509 -days 3650 -key ca.key -out ca.crt -subj "/C=CN/ST=GD/L=SZ/O=test/OU=test/CN=*.ca/emailAddress=test@test.com"
 keytool -importcert -alias test -file ca.crt -keystore ca.truststore
 # keytool -list -keystore ca.truststore
-openssl x509 -in ca.crt -out ca.pem -outform PEM
+#openssl x509 -in ca.crt -out ca.pem -outform PEM
 echo "genrsa & ca end"
 
 echo "gen tomcat certificate"
