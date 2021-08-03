@@ -1,3 +1,4 @@
+echo "参数：isMultiDomain:true,false"
 #cp /etc/ssl/openssl.cnf ./demo.cnf
 echo "pure"
 rm -fr client.*
@@ -15,8 +16,24 @@ echo "genrsa & ca end"
 echo "gen tomcat certificate"
 #生成密钥对
 openssl genrsa -out tomcat.key 2048
-#生成csr
-openssl req -new -key tomcat.key -out tomcat.csr -subj "/C=CN/ST=GD/L=SZ/O=test/OU=test/CN=*.demo/emailAddress=test@test.com" -config ./demo.cnf
+#生成csr:
+# 方式一：指定config参数配置多域名；
+#openssl req -new -key tomcat.key -out tomcat.csr -subj "/C=CN/ST=GD/L=SZ/O=test/OU=test/CN=*.demo/emailAddress=test@test.com" -config ./demo.cnf
+# 方式二：
+openssl req -new -key tomcat.key -out tomcat.csr -subj "/C=CN/ST=GD/L=SZ/O=test/OU=test/CN=*.demo/emailAddress=test@test.com"
+cat > v3.ext <<-EOF
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1=*.demo
+DNS.2=*.multi.demo
+IP.1=127.0.0.1
+EOF
+
 #生成证书
 openssl x509 -req -sha256 -in tomcat.csr -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650 -out tomcat.crt
 #导出
