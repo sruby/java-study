@@ -1,0 +1,41 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  skywalking-ui
+  namespace: skywalking-ns
+spec:
+  selector:
+    app:  skywalking-ui
+  type:  LoadBalancer
+  ports:
+  - name:  p1
+    port:  8080
+    targetPort:  8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skywalking-ui
+spec:
+  selector:
+    matchLabels:
+      app: skywalking-ui
+  template:
+    metadata:
+      labels:
+        app: skywalking-ui
+    spec:
+      containers:
+      - name: skywalking-ui
+        image: apache/skywalking-ui:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+          - name: "SW_OAP_ADDRESS"
+            value: "skywalking-oap:12800"
+        
