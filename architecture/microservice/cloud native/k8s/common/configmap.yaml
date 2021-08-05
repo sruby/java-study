@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oradb
+  labels:
+    app: oradb
+data:
+  oracleconfig.properties: |
+    DB_SID=PSTG
+    DB_PDB=PSTGPDB1
+    DB_PASSWD=Oradoc_db1
+    DB_DOMAIN=localdomain
+    DB_BUNDLE=basic
+    DB_MEMORY=8g

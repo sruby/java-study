@@ -1,0 +1,89 @@
+#-------------定义oralce代理服务--------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: oralce-svc
+  labels:
+    app: oralce
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 1521
+      targetPort: 1521
+      name: oracle1521
+    - port: 8080
+      targetPort: 8080
+      name: oralce8080
+  selector:
+    app: oralce
+---
+
+#-------------定义oralce部署--------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oralce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oralce
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: oralce
+    spec:
+      volumes:
+        - name:  storage0001
+          persistentVolumeClaim:  
+            claimName: pvc0001
+      containers:
+        - name: oralce
+          command:
+          - /home/oracle/setup/dockerInit.sh
+          image: store/oracle/database-enterprise:12.2.0.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "4024Mi"
+              cpu: "2000m"
+          ports:
+            - containerPort: 1521
+            - containerPort: 8080
+          volumeMounts:
+            - name: storage0001
+              mountPath: /u01/app/oracle
+          env:
+          - name: DB_SID
+            valueFrom:
+              configMapKeyRef:
+                name: oradb #Read from a configmap called oradb
+                key: DB_SID #Read the key call DB_SID
+          - name: DB_PDB
+            valueFrom:
+              configMapKeyRef:
+                name: oradb #Read from a configmap called oradb
+                key: DB_PDB #Read the key call DB_PDB
+          - name: DB_PASSWD
+            valueFrom:
+              configMapKeyRef:
+                name: oradb #Read from a configmap called oradb
+                key: DB_PASSWD #Read the key call DB_PASSWD
+          - name: DB_DOMAIN
+            valueFrom:
+              configMapKeyRef:
+                name: oradb #Read from a configmap called oradb
+                key: DB_DOMAIN #Read the key call DB_DOMAIN
+          - name: DB_BUNDLE
+            valueFrom:
+              configMapKeyRef:
+                name: oradb #Read from a configmap called oradb
+                key: DB_BUNDLE #Read the key call DB_BUNDLE
+          - name: DB_MEMORY
+            valueFrom:
+              configMapKeyRef:
+                name: oradb #Read from a configmap called oradb
+                key: DB_MEMORY #Read the key call DB_MEMORY
+          

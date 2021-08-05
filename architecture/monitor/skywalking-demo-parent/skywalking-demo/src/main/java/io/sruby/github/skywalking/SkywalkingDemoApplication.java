@@ -1,4 +1,4 @@
-package io.sruby.github.skywalkingdemo;
+package io.sruby.github.skywalking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

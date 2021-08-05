@@ -1,7 +1,7 @@
 version: '3'
 services:
   elasticsearch:
-    image: elasticsearch:7.13.3
+    image: elasticsearch:7.13.4
     container_name: sy-elasticsearch
 #    restart: always
     environment:
@@ -55,17 +55,42 @@ services:
       - 8080:8080
     environment:
       collector.ribbon.listOfServers: skywalking-oap:12800
-  skywalking-demo:
-      image: sruby/skywalking-demo:latest
-      container_name: skywalking-demo
-      networks:
-            - sy-net
-      restart: always
-      ports:
-        - 8079:8079
-      env_file: .env
-      environment:
-        TZ: Asia/Shanghai
+
+  rabbitmq:
+    image: rabbitmq:3.9.1-management
+    container_name: rabbitmq
+    networks:
+      - sy-net
+    ports:
+      - 15672:15672
+
+  redis:
+    image: redis:6.2.5-alpine3.14
+    container_name: redis
+    networks:
+      - sy-net
+    ports:
+      - 6379:6379
+
+  oracle:
+    image: store/oracle/database-enterprise:12.2.0.1
+    container_name: oracle
+    networks:
+      - sy-net
+    ports:
+      - 1521:1521
+
+#  skywalking-demo:
+#      image: sruby/skywalking-demo:latest
+#      container_name: skywalking-demo
+#      networks:
+#            - sy-net
+#      restart: always
+#      ports:
+#        - 8079:8079
+#      env_file: .env
+#      environment:
+#        TZ: Asia/Shanghai
 networks:
   sy-net:
 #  If set to true, specifies that this network has been created outside of Compose. docker-compose up does not attempt to create it, and raises an error if it doesn’t exist.

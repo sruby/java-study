@@ -1,4 +1,4 @@
-package io.sruby.github.skywalkingdemo.intercceptor;
+package io.sruby.github.skywalking.intercceptor;
 
 import org.apache.skywalking.apm.toolkit.trace.Tag;
 import org.apache.skywalking.apm.toolkit.trace.Trace;
@@ -16,7 +16,7 @@ public class TraceTagInterceptor implements HandlerInterceptor {
 
     @Override
     @Trace(operationName = "stockCodeSpan")
-    @Tag(key = "tag.demo.a",value = "1")
+//    @Tag(key = "tag.demo.a",value = "1")
     @Tag(key = "stock_code",value = "arg[0].parameterMap.")
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         logger.info("[preHandle][handler({})]", handler);

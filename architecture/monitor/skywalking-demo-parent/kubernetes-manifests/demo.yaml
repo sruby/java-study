@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  skywalking-demo-server
+  namespace: skywalking-ns
+spec:
+  selector:
+    app:  skywalking-demo-server
+  type:  LoadBalancer
+  ports:
+  - name:  skywalking-demo-server
+    port:  8079
+    targetPort:  8079
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skywalking-demo-server
+spec:
+  selector:
+    matchLabels:
+      app: skywalking-demo-server
+  template:
+    metadata:
+      labels:
+        app: skywalking-demo-server
+    spec:
+      containers:
+      - name: skywalking-demo-server
+        image: sruby/skywalking-demo:latest
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8079
