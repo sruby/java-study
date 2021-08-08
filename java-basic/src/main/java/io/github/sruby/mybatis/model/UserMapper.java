@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 要注意的一个地方就是。在 User.xml 的配置文件中，mappernamespace="io.github.sruby.mybatis.model.UserMapper"
 ，命名空间非常重要，不能有错，必须与我们定义的 package和接口一致。
- * @author liuwf on Sep 12, 2016 9:13:17 PM
+ * @author  on Sep 12, 2016 9:13:17 PM
  */
 public interface UserMapper
 {

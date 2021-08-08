@@ -1,6 +1,6 @@
-package io.sruby.github.skywalking.config;
+package io.github.sruby.skywalking.config;
 
-import io.sruby.github.skywalking.intercceptor.TraceTagInterceptor;
+import io.github.sruby.skywalking.intercceptor.TraceTagInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

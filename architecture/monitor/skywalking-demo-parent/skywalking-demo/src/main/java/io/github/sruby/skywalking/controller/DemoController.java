@@ -1,20 +1,21 @@
-package io.sruby.github.skywalking.controller;
+package io.github.sruby.skywalking.controller;
 
 import io.github.sruby.skywalking.api.DemoClient;
+import io.github.sruby.skywalking.dto.UserDTO;
+import io.github.sruby.skywalking.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-//@RequestMapping("/demo")
 public class DemoController implements DemoClient {
+    @Autowired
+    private UserService userService;
 
-//    @GetMapping("/echo")
-//    @Trace(operationName = "trace_annotations")
-//    @Tag(key = "tag.demo.a",value = "1")
-//    @Tag(key = "tag.demo",value = "arg[0]")
     @Override
     public String echo(@RequestParam String param) throws InterruptedException {
         Random random = new Random();
@@ -26,12 +27,35 @@ public class DemoController implements DemoClient {
         return "echo";
     }
 
-//    @GetMapping("/hello")
     @Override
     public String hello() throws InterruptedException {
 //        int timeout = new Random().nextInt(10000);
 //        TimeUnit.MILLISECONDS.sleep(timeout);
         return "hello";
+    }
+
+    @Override
+    public String getDataFromRedis() {
+
+        return null;
+    }
+
+    @Override
+    public String produceMeg() {
+        return null;
+    }
+
+    @Override
+    public String consumerMeg() {
+        return null;
+    }
+
+    @Override
+    public List<UserDTO> saveAndGetDB() {
+        Integer id = 1;
+        userService.insert(UserDTO.builder().id(id).name("test").userAuthority("all").build());
+        List<UserDTO> user = userService.listById(id);
+        return user;
     }
 
 }

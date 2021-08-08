@@ -1,4 +1,4 @@
-package io.sruby.github.skywalking.intercceptor;
+package io.github.sruby.skywalking.intercceptor;
 
 import org.apache.skywalking.apm.toolkit.trace.Tag;
 import org.apache.skywalking.apm.toolkit.trace.Trace;

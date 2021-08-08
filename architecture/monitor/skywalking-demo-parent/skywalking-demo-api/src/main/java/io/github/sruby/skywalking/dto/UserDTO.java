@@ -1,4 +1,4 @@
-package io.sruby.github.skywalking.entity;
+package io.github.sruby.skywalking.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class UserDTO {
     private Integer id;
     private String name;
     private String userAuthority;
