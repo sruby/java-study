@@ -63,6 +63,7 @@ services:
       - sy-net
     ports:
       - 15672:15672
+      - 5672:5672
 
   redis:
     image: redis:6.2.5-alpine3.14
