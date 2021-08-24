@@ -1,8 +1,8 @@
 package io.sruby.github.test.unit.service;
 
-import io.sruby.github.test.unit.dto.IpoDTO;
-import io.sruby.github.test.unit.entity.Ipo;
-import io.sruby.github.test.unit.entity.IpoCompany;
+import io.sruby.github.test.unit.dto.BookDTO;
+import io.sruby.github.test.unit.entity.Book;
+import io.sruby.github.test.unit.entity.BookCompany;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +16,25 @@ import static org.mockito.Mockito.when;
 //@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
-public class IpoServiceMockInSpringTest {
+public class BookServiceMockInSpringTest {
     @Autowired
-    IpoCompanyService ipoCompanyService;
+    BookCompanyService bookCompanyService;
     @Autowired
-    IpoService ipoService;
+    BookService ipoService;
 
     @Test
     void testGet() {
         String code = "8888";
         String companyId = "00001";
-        when(ipoCompanyService.get(companyId)).thenReturn(new IpoCompany(1,companyId, code+"_Company"));
+        when(bookCompanyService.get(companyId)).thenReturn(new BookCompany(1,companyId, code+"_Company"));
 
-        IpoDTO result = ipoService.get(code,companyId);
-        Assertions.assertEquals(new IpoDTO(code, companyId, code+"_Company"), result);
+        BookDTO result = ipoService.get(code,companyId);
+        Assertions.assertEquals(new BookDTO(code, companyId, code+"_Company"), result);
     }
 
     @Test
     public void testInsert(){
-        ipoService.insert(Ipo.builder().id(4).code("111").companyId("8888").build());
+        ipoService.insert(Book.builder().id(4).code("111").companyId("8888").build());
     }
 
 

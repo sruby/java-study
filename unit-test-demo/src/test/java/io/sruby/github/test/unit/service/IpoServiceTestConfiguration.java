@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Profile;
 public class IpoServiceTestConfiguration {
     @Bean
     @Primary
-    public IpoCompanyService companyService() {
-        return Mockito.mock(IpoCompanyService.class);
+    public BookCompanyService companyService() {
+        return Mockito.mock(BookCompanyService.class);
     }
 }

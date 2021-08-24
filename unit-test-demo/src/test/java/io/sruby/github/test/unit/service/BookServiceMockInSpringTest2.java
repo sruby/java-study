@@ -1,8 +1,8 @@
 package io.sruby.github.test.unit.service;
 
-import io.sruby.github.test.unit.dto.IpoDTO;
-import io.sruby.github.test.unit.entity.Ipo;
-import io.sruby.github.test.unit.entity.IpoCompany;
+import io.sruby.github.test.unit.dto.BookDTO;
+import io.sruby.github.test.unit.entity.Book;
+import io.sruby.github.test.unit.entity.BookCompany;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,35 +20,35 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
-class IpoServiceMockInSpringTest2 {
+class BookServiceMockInSpringTest2 {
     @MockBean
-    IpoCompanyService ipoCompanyService;
+    BookCompanyService bookCompanyService;
     @SpyBean
-    IpoService ipoService;
+    BookService ipoService;
 
     @Test
     void testGet() {
         String code = "8888";
         String companyId = "00001";
-        when(ipoCompanyService.get(companyId)).thenReturn(new IpoCompany(1,companyId, code+"_Company"));
+        when(bookCompanyService.get(companyId)).thenReturn(new BookCompany(1,companyId, code+"_Company"));
 
-        IpoDTO result = ipoService.get(code,companyId);
-        Assertions.assertEquals(new IpoDTO(code, companyId, code+"_Company"), result);
+        BookDTO result = ipoService.get(code,companyId);
+        Assertions.assertEquals(new BookDTO(code, companyId, code+"_Company"), result);
     }
 
     @Test
     public void testInsert(){
-        ipoService.insert(Ipo.builder().id(4).code("111").companyId("8888").build());
+        ipoService.insert(Book.builder().id(4).code("111").companyId("8888").build());
     }
 
     @Test
     public void test(){
         int id = 1;
-        when(ipoService.get(id)).thenReturn(Ipo.builder().id(1).code("111").companyId("8888").build());
-        Ipo ipo = ipoService.getIpoWithBusinuss(id);
-        assertThat(ObjectUtils.isEmpty(ipo)).isFalse();
-        assertThat(ipo.getId()).isEqualTo(id);
-        assertThat(ipo.getCode()).startsWith("Businuss");
+        when(ipoService.get(id)).thenReturn(Book.builder().id(1).code("111").companyId("8888").build());
+        Book book = ipoService.getIpoWithBusinuss(id);
+        assertThat(ObjectUtils.isEmpty(book)).isFalse();
+        assertThat(book.getId()).isEqualTo(id);
+        assertThat(book.getCode()).startsWith("Businuss");
     }
 
 }

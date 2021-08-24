@@ -1,4 +1,4 @@
-package io.sruby.github.test.unit.entity;
+package io.sruby.github.test.unit.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,16 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @description: user
+ * @description: ipo
  * @author: sruby
- * @create: 2020-12-07 11:55
+ * @create: 2020-12-07 15:27
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class IpoCompany {
-    private Integer id;
+public class BookDTO {
+    private String code;
     private String companyId;
     private String companyName;
 }

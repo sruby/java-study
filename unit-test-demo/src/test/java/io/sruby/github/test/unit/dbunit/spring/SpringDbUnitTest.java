@@ -4,7 +4,7 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseSetups;
-import io.sruby.github.test.unit.service.IpoService;
+import io.sruby.github.test.unit.service.BookService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class SpringDbUnitTest {
 //    @Spy
 //    private IpoMapper ipoMapper;
     @Autowired
-    IpoService ipoService;
+BookService ipoService;
 
 //    @DatabaseSetup("/partial.xml")
     @BeforeAll
