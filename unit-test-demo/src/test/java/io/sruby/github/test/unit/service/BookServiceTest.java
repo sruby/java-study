@@ -28,19 +28,17 @@ class BookServiceTest {
 
     @Test
     public void testDeleteAllAndSaveBatch(){
-        bookService.removeAll();
-
         ArrayList<Book> entityList = new ArrayList<>();
 
         for (int i = 0; i < 150000; i++){
-                entityList.add(Book.builder()
+            entityList.add(Book.builder()
                         .id(1111)
                         .code("88888")
                         .companyId("9999")
                         .build())    ;
         }
 
-        bookService.saveBatch(entityList);
+        bookService.deleteAllAndSaveBatch(entityList);
     }
 
 }

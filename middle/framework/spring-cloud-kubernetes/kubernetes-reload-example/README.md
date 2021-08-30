@@ -102,7 +102,16 @@ To help you get started, a sample `ServiceAccount` and `RoleBinding` configurati
             privileged: false
         serviceAccountName: <service_account_name>
 ```
-注：通过edit deployment添加serviceAccountName: config-reader
+
+注：
+
+* 通过edit deployment添加serviceAccountName: config-reader
+
 ```yml
 kubectl edit deployment spring-cloud-reload
 ```
+
+* 使用minikube需要load image到minikube
+  ```shell
+  minikube image load {imageName:tag}
+  ```

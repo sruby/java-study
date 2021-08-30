@@ -1,0 +1,31 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.9.1-management
+    container_name: rabbitmq
+    networks:
+      - sy-net
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  redis:
+    image: redis:6.2.5-alpine3.14
+    container_name: redis
+    networks:
+      - sy-net
+    ports:
+      - 6379:6379
+
+  oracle:
+    image: store/oracle/database-enterprise:12.2.0.1
+    container_name: oracle
+    networks:
+      - sy-net
+    ports:
+      - 1521:1521
+
+networks:
+  sy-net:
+#  If set to true, specifies that this network has been created outside of Compose. docker-compose up does not attempt to create it, and raises an error if it doesn’t exist.
+    external: false

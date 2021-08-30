@@ -1,0 +1,8 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: oracle
+  namespace: external
+spec:
+  type: ExternalName
+  externalName: 127.0.0.1

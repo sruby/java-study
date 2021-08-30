@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 /**
  * @description:
  * @author: sruby
@@ -46,8 +48,15 @@ public class BookService extends ServiceImpl<BookMapper, Book> implements IBookS
     }
 
     @Override
-    @Transactional
+
     public void removeAll(){
         remove(new QueryWrapper<Book>().lambda().gt(Book::getId,0));
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllAndSaveBatch(ArrayList<Book> entityList) {
+        this.removeAll();
+        this.saveBatch(entityList);
     }
 }
