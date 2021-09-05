@@ -1,0 +1,285 @@
+{
+  "apiVersion" : "apps/v1",
+  "kind" : "Deployment",
+  "metadata" : {
+    "annotations" : {
+      "fabric8.io/git-branch" : "master",
+      "fabric8.io/git-commit" : "64cc382cd4f14ba869e2b50f197d344cb0806e7f",
+      "fabric8.io/git-url" : "https://gitee.com/sruby001/java-study.git"
+    },
+    "creationTimestamp" : "2021-08-30T03:50:52Z",
+    "generation" : 14,
+    "labels" : {
+      "app" : "spring-cloud-kubernetes-example-reload",
+      "group" : "org.springframework.cloud.kubernetes",
+      "provider" : "fabric8",
+      "version" : "0.0.5"
+    },
+    "managedFields" : [ {
+      "apiVersion" : "apps/v1",
+      "fieldsType" : "FieldsV1",
+      "fieldsV1" : {
+        "f:metadata" : {
+          "f:annotations" : {
+            "." : { },
+            "f:fabric8.io/git-branch" : { },
+            "f:fabric8.io/git-commit" : { },
+            "f:fabric8.io/git-url" : { }
+          },
+          "f:labels" : {
+            "." : { },
+            "f:app" : { },
+            "f:group" : { },
+            "f:provider" : { },
+            "f:version" : { }
+          }
+        },
+        "f:spec" : {
+          "f:progressDeadlineSeconds" : { },
+          "f:replicas" : { },
+          "f:revisionHistoryLimit" : { },
+          "f:selector" : { },
+          "f:strategy" : {
+            "f:rollingUpdate" : {
+              "." : { },
+              "f:maxSurge" : { },
+              "f:maxUnavailable" : { }
+            },
+            "f:type" : { }
+          },
+          "f:template" : {
+            "f:metadata" : {
+              "f:annotations" : {
+                "." : { },
+                "f:fabric8.io/git-branch" : { },
+                "f:fabric8.io/git-commit" : { },
+                "f:fabric8.io/git-url" : { }
+              },
+              "f:labels" : {
+                "." : { },
+                "f:app" : { },
+                "f:group" : { },
+                "f:provider" : { },
+                "f:version" : { }
+              }
+            },
+            "f:spec" : {
+              "f:containers" : {
+                "k:{\"name\":\"spring-boot\"}" : {
+                  "." : { },
+                  "f:env" : {
+                    "." : { },
+                    "k:{\"name\":\"KUBERNETES_NAMESPACE\"}" : {
+                      "." : { },
+                      "f:name" : { },
+                      "f:valueFrom" : {
+                        "." : { },
+                        "f:fieldRef" : {
+                          "." : { },
+                          "f:apiVersion" : { },
+                          "f:fieldPath" : { }
+                        }
+                      }
+                    }
+                  },
+                  "f:image" : { },
+                  "f:imagePullPolicy" : { },
+                  "f:livenessProbe" : {
+                    "." : { },
+                    "f:failureThreshold" : { },
+                    "f:httpGet" : {
+                      "." : { },
+                      "f:path" : { },
+                      "f:port" : { },
+                      "f:scheme" : { }
+                    },
+                    "f:initialDelaySeconds" : { },
+                    "f:periodSeconds" : { },
+                    "f:successThreshold" : { },
+                    "f:timeoutSeconds" : { }
+                  },
+                  "f:name" : { },
+                  "f:ports" : {
+                    "." : { },
+                    "k:{\"containerPort\":8080,\"protocol\":\"TCP\"}" : {
+                      "." : { },
+                      "f:containerPort" : { },
+                      "f:name" : { },
+                      "f:protocol" : { }
+                    },
+                    "k:{\"containerPort\":8778,\"protocol\":\"TCP\"}" : {
+                      "." : { },
+                      "f:containerPort" : { },
+                      "f:name" : { },
+                      "f:protocol" : { }
+                    },
+                    "k:{\"containerPort\":9779,\"protocol\":\"TCP\"}" : {
+                      "." : { },
+                      "f:containerPort" : { },
+                      "f:name" : { },
+                      "f:protocol" : { }
+                    }
+                  },
+                  "f:readinessProbe" : {
+                    "." : { },
+                    "f:failureThreshold" : { },
+                    "f:httpGet" : {
+                      "." : { },
+                      "f:path" : { },
+                      "f:port" : { },
+                      "f:scheme" : { }
+                    },
+                    "f:initialDelaySeconds" : { },
+                    "f:periodSeconds" : { },
+                    "f:successThreshold" : { },
+                    "f:timeoutSeconds" : { }
+                  },
+                  "f:resources" : { },
+                  "f:securityContext" : {
+                    "." : { },
+                    "f:privileged" : { }
+                  },
+                  "f:terminationMessagePath" : { },
+                  "f:terminationMessagePolicy" : { }
+                }
+              },
+              "f:dnsPolicy" : { },
+              "f:restartPolicy" : { },
+              "f:schedulerName" : { },
+              "f:securityContext" : { },
+              "f:terminationGracePeriodSeconds" : { }
+            }
+          }
+        }
+      },
+      "manager" : "okhttp",
+      "operation" : "Update",
+      "time" : "2021-08-30T03:50:52Z"
+    } ],
+    "name" : "spring-cloud-reload",
+    "namespace" : "default",
+    "resourceVersion" : "126780",
+    "uid" : "9c463864-fa95-4fd7-b79d-adc47b0bafde"
+  },
+  "spec" : {
+    "progressDeadlineSeconds" : 600,
+    "replicas" : 1,
+    "revisionHistoryLimit" : 2,
+    "selector" : {
+      "matchLabels" : {
+        "app" : "spring-cloud-kubernetes-example-reload",
+        "group" : "org.springframework.cloud.kubernetes",
+        "provider" : "fabric8"
+      }
+    },
+    "strategy" : {
+      "rollingUpdate" : {
+        "maxSurge" : "25%",
+        "maxUnavailable" : "25%"
+      },
+      "type" : "RollingUpdate"
+    },
+    "template" : {
+      "metadata" : {
+        "annotations" : {
+          "fabric8.io/git-branch" : "master",
+          "fabric8.io/git-commit" : "64cc382cd4f14ba869e2b50f197d344cb0806e7f",
+          "fabric8.io/git-url" : "https://gitee.com/sruby001/java-study.git"
+        },
+        "labels" : {
+          "app" : "spring-cloud-kubernetes-example-reload",
+          "group" : "org.springframework.cloud.kubernetes",
+          "provider" : "fabric8",
+          "version" : "0.0.5"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "apiVersion" : "v1",
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          } ],
+          "image" : "kubernetes/spring-cloud-kubernetes-example-reload:0.0.5",
+          "imagePullPolicy" : "IfNotPresent",
+          "livenessProbe" : {
+            "failureThreshold" : 3,
+            "httpGet" : {
+              "path" : "/actuator/health",
+              "port" : 8080,
+              "scheme" : "HTTP"
+            },
+            "initialDelaySeconds" : 180,
+            "periodSeconds" : 10,
+            "successThreshold" : 1,
+            "timeoutSeconds" : 1
+          },
+          "name" : "spring-boot",
+          "ports" : [ {
+            "containerPort" : 8080,
+            "name" : "http",
+            "protocol" : "TCP"
+          }, {
+            "containerPort" : 9779,
+            "name" : "prometheus",
+            "protocol" : "TCP"
+          }, {
+            "containerPort" : 8778,
+            "name" : "jolokia",
+            "protocol" : "TCP"
+          } ],
+          "readinessProbe" : {
+            "failureThreshold" : 3,
+            "httpGet" : {
+              "path" : "/actuator/health",
+              "port" : 8080,
+              "scheme" : "HTTP"
+            },
+            "initialDelaySeconds" : 10,
+            "periodSeconds" : 10,
+            "successThreshold" : 1,
+            "timeoutSeconds" : 1
+          },
+          "resources" : { },
+          "securityContext" : {
+            "privileged" : false
+          },
+          "terminationMessagePath" : "/dev/termination-log",
+          "terminationMessagePolicy" : "File"
+        } ],
+        "dnsPolicy" : "ClusterFirst",
+        "restartPolicy" : "Always",
+        "schedulerName" : "default-scheduler",
+        "securityContext" : { },
+        "terminationGracePeriodSeconds" : 30,
+        "serviceAccountName": "config-reader"
+      }
+    }
+  },
+  "status" : {
+    "availableReplicas" : 1,
+    "conditions" : [ {
+      "lastTransitionTime" : "2021-08-30T11:08:43Z",
+      "lastUpdateTime" : "2021-08-30T11:55:00Z",
+      "message" : "ReplicaSet \"spring-cloud-reload-798b6d9587\" has successfully progressed.",
+      "reason" : "NewReplicaSetAvailable",
+      "status" : "True",
+      "type" : "Progressing"
+    }, {
+      "lastTransitionTime" : "2021-08-30T23:54:12Z",
+      "lastUpdateTime" : "2021-08-30T23:54:12Z",
+      "message" : "Deployment has minimum availability.",
+      "reason" : "MinimumReplicasAvailable",
+      "status" : "True",
+      "type" : "Available"
+    } ],
+    "observedGeneration" : 13,
+    "readyReplicas" : 1,
+    "replicas" : 1,
+    "updatedReplicas" : 1
+  }
+}

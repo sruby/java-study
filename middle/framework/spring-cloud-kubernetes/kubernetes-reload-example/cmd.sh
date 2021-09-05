@@ -11,7 +11,9 @@ kubectl create configmap reload-example --from-file application.properties --fro
 #replace configmap from one file
 kubectl create configmap reload-example --from-file ./application.properties -o yaml --dry-run | kubectl replace -f -
 
-#replace configmap from multi file
-kubectl create configmap reload-example --from-file ./application.properties --from-file ./src/main/resources/application-kubernetes.properties -o yaml --dry-run | kubectl replace -f -
+#replace configmap from multi file(kubernetes)
+kubectl create configmap reload-example --from-file ./application.properties --from-file ./application-kubernetes.properties -o yaml --dry-run | kubectl replace -f -
+#replace configmap from multi file(dev)
+kubectl create configmap reload-example --from-file ./application.properties --from-file ./src/main/resources/application-dev.properties -o yaml --dry-run | kubectl replace -f -
 
 

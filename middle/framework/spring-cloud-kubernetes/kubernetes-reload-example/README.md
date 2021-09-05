@@ -112,6 +112,12 @@ kubectl edit deployment spring-cloud-reload
 ```
 
 * 使用minikube需要load image到minikube
+
   ```shell
   minikube image load {imageName:tag}
   ```
+
+## JKube usage
+
+
+> [org.eclipse.jkube/kubernetes-maven-plugin](https://www.eclipse.org/jkube/docs/kubernetes-maven-plugin#building-images)

@@ -194,30 +194,18 @@
 			</plugin>
 
 			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>fabric8-maven-plugin</artifactId>
-				<version>4.4.1</version>
+				<groupId>org.eclipse.jkube</groupId>
+				<artifactId>kubernetes-maven-plugin</artifactId>
+				<version>1.4.0</version>
 				<executions>
 					<execution>
-						<id>fmp</id>
 						<goals>
 							<goal>resource</goal>
+							<goal>build</goal>
+							<goal>apply</goal>
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<enricher>
-						<config>
-							<fmp-controller>
-								<name>spring-cloud-reload</name>
-								<service-account>config-reader</service-account>
-							</fmp-controller>
-							<fmp-service>
-								<name>spring-cloud-reload</name>
-							</fmp-service>
-						</config>
-					</enricher>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -225,59 +213,9 @@
 	<profiles>
 		<profile>
 			<id>kubernetes</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
-						<version>4.4.1</version>
-						<executions>
-							<execution>
-								<id>fmp</id>
-								<goals>
-									<goal>resource</goal>
-									<goal>build</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<enricher>
-								<config>
-									<fmp-controller>
-										<name>spring-cloud-reload</name>
-									</fmp-controller>
-									<fmp-service>
-										<name>spring-cloud-reload</name>
-										<type>LoadBalancer</type>
-									</fmp-service>
-									<fmp-fmp-serviceaccount>config-reader</fmp-fmp-serviceaccount>
-								</config>
-							</enricher>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 		<profile>
 			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
-						<version>4.4.1</version>
-						<executions>
-							<execution>
-								<id>fmp</id>
-								<goals>
-									<goal>resource</goal>
-									<goal>helm</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 
 		<profile>
@@ -285,38 +223,9 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
-						<version>4.4.1</version>
-						<executions>
-							<execution>
-								<id>fmp</id>
-								<goals>
-									<goal>resource</goal>
-									<goal>helm</goal>
-									<goal>build</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>3.0.0-M5</version>
-						<executions>
-							<execution>
-								<id>run-integration-tests</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>integration-test</goal>
-									<goal>verify</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<skipTests>false</skipTests>
-							<skipITs>false</skipITs>
-						</configuration>
+						<groupId>org.eclipse.jkube</groupId>
+						<artifactId>kubernetes-maven-plugin</artifactId>
+						<version>1.4.0</version>
 					</plugin>
 				</plugins>
 			</build>
