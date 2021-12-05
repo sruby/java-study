@@ -21,7 +21,8 @@ public class SpringMVCConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(this.traceTagInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(this.traceTagInterceptor()).addPathPatterns("/**")
+        .excludePathPatterns("/demo/echo");
     }
 
 }
