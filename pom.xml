@@ -35,5 +35,6 @@
 		<module>rocketmq-demo</module>
 		<module>springboot-demo-parent</module>
 		<module>jacoco-demo</module>
-	</modules>
+        <module>middle/framework/swift/swift-demo</module>
+    </modules>
 </project>

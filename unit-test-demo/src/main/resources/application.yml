@@ -8,7 +8,7 @@ spring:
     username: root
     password: 123321
     dbunit:
-      schema: unit-test
+        schema: unit_test
   main:
     allow-bean-definition-overriding: true
 # Logger Config
