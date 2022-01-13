@@ -36,5 +36,6 @@
 		<module>springboot-demo-parent</module>
 		<module>jacoco-demo</module>
         <module>middle/framework/swift/swift-demo</module>
-    </modules>
+		<module>middle/framework/connection_pool/p6spy/p6spy-springboot-jpa-demo</module>
+	</modules>
 </project>
