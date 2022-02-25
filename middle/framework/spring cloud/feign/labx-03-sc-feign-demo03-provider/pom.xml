@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
+   <!-- <parent>
         <artifactId>labx-03-spring-cloud-feign</artifactId>
         <groupId>cn.iocoder.springboot.labs</groupId>
         <version>1.0-SNAPSHOT</version>
-    </parent>
+    </parent>-->
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>io.github.sruby</groupId>
     <artifactId>labx-03-sc-feign-demo03-provider</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <spring.boot.version>2.2.4.RELEASE</spring.boot.version>

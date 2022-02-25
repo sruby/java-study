@@ -1,4 +1,4 @@
-package io.github.sruby.skywalking.dto;
+package io.github.sruby.skywalking.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

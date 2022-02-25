@@ -1,9 +1,10 @@
-package io.github.sruby.skywalking.dto;
+package io.github.sruby.skywalking.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
  * @description: user
@@ -13,8 +14,9 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public class UserDTO {
+@Builder
+@TableName("T_USER")
+public class User {
     private Integer id;
     private String name;
     private String userAuthority;

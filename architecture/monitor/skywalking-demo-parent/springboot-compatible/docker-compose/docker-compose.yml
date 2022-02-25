@@ -1,0 +1,17 @@
+version: '3'
+services:
+  skywalking-demo:
+    image: sruby/skywalking-demo:latest
+    container_name: skywalking-demo
+    networks:
+          - docker-compose_sy-net
+    restart: always
+    ports:
+      - 8079:8079
+    env_file: .env
+    environment:
+      TZ: Asia/Shanghai
+
+networks:
+  docker-compose_sy-net:
+    external: true
