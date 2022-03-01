@@ -12,5 +12,6 @@
         <module>skywalking-gateway-feign-parent/skywalking-demo-api</module>
         <module>skywalking-gateway-feign-parent/skywalking-demo-consumer</module>
         <module>skywalking-gateway-feign-parent/skywalking-demo-provider</module>
+        <module>skywalking-gateway-feign-parent/skywalking-demo-gateway</module>
     </modules>
 </project>

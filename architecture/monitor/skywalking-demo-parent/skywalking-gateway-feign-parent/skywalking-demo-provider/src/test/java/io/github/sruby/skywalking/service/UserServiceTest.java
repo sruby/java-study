@@ -2,7 +2,6 @@ package io.github.sruby.skywalking.service;
 
 import io.github.sruby.skywalking.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,5 @@ class UserServiceTest {
                 .name("test")
                 .userAuthority("all")
                 .build());
-        Assert.assertEquals(1,insert);
     }
 }

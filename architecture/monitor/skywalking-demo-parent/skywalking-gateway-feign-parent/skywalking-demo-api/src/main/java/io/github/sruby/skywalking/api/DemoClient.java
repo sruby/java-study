@@ -13,7 +13,7 @@ import java.util.List;
  * @author: sruby
  * @create: 2021-08-04 15:13
  */
-@FeignClient(name = "skywalking-demo-server")
+@FeignClient(name = "skywalking-demo-server",url = "127.0.0.1:8079")
 @RequestMapping("/demo")
 public interface DemoClient {
     @GetMapping("/echo")
