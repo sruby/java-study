@@ -1,0 +1,112 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.13.4
+    container_name: sy-elasticsearch
+#    restart: always
+    environment:
+       - discovery.type=single-node
+#      - cluster.name=elasticsearch
+#      - bootstrap.memory_lock=true
+#      - xpack.security.enabled=false
+#      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+#      - node.name=elasticsearch_node_1
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+    volumes:
+      - ../data/elasticsearch/data:/usr/share/elasticsearch/data
+      - ../data/elasticsearch/logs:/usr/share/elasticsearch/logs
+#      - ./devops/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - sy-net
+    ports:
+      - 9200:9200
+      - 9300:9300
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  skywalking-oap:
+    image: apache/skywalking-oap-server:8.9.1
+    container_name: skywalking-oap
+    networks:
+      - sy-net
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    restart: always
+    ports:
+      - 11800:11800
+      - 12800:12800
+    volumes:
+      - ./devops/skywalking/config:/apache-skywalking-apm-bin/config:ro
+    environment:
+      SW_STORAGE: elasticsearch
+      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
+      SW_HEALTH_CHECKER: default
+      SW_TELEMETRY: prometheus
+      JAVA_OPTS: "-Xms512m -Xmx512m -Duser.timezone=Asia/Shanghai"
+#      TZ: Asia/Shanghai
+
+  skywalking-ui:
+    image: apache/skywalking-ui:8.9.1
+    container_name: skywalking-ui
+    networks:
+      - sy-net
+    depends_on:
+      - skywalking-oap
+    links:
+      - skywalking-oap
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      collector.ribbon.listOfServers: skywalking-oap:12800
+#      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms256m -Xmx256m -Duser.timezone=Asia/Shanghai"
+
+  rabbitmq:
+    image: rabbitmq:3.9.1-management
+    container_name: rabbitmq
+    networks:
+      - sy-net
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  redis:
+    image: redis:6.2.5-alpine3.14
+    container_name: redis
+    networks:
+      - sy-net
+    ports:
+      - 6379:6379
+
+#  oracle:
+#    image: store/oracle/database-enterprise:12.2.0.1
+#    container_name: oracle
+#    networks:
+#      - sy-net
+#    ports:
+#      - 1521:1521
+
+#  skywalking-demo:
+#      image: sruby/skywalking-demo:latest
+#      container_name: skywalking-demo
+#      networks:
+#            - sy-net
+#      restart: always
+#      ports:
+#        - 8079:8079
+#      env_file: .env
+#      environment:
+#        TZ: Asia/Shanghai
+networks:
+  sy-net:
+#  If set to true, specifies that this network has been created outside of Compose. docker-compose up does not attempt to create it, and raises an error if it doesn’t exist.
+    external: false

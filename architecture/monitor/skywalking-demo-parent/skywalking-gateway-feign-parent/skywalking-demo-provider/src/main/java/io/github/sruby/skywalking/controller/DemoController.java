@@ -20,6 +20,7 @@ public class DemoController implements DemoClient {
     public String echo(@RequestParam String param) throws InterruptedException {
         Random random = new Random();
         int timeout = random.nextInt(10000);
+
         TimeUnit.MILLISECONDS.sleep(timeout);
         if (random.nextInt(3)==1){
             throw new RuntimeException();
