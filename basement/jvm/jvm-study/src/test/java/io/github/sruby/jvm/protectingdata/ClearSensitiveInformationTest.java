@@ -12,7 +12,7 @@ class ClearSensitiveInformationTest {
 
     @Test
     public void test() {
-        char[] password = new char[10]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+//        char[] password = new char[10]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
     }
 
 }
