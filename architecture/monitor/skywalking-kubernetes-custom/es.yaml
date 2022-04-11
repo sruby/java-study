@@ -52,4 +52,18 @@ spec:
             value: "single-node"
           - name: "ES_JAVA_OPTS"
             value: "-Xms512m -Xmx512m"
+        volumeMounts:
+          - name: skywalking-data
+            mountPath: /usr/share/elasticsearch/data
+            subPath: elasticsearch/data
+          - name: skywalking-data
+            mountPath: /usr/share/elasticsearch/config
+            subPath: elasticsearch/config
+          - name: skywalking-data
+            mountPath: /usr/share/elasticsearch/plugin
+            subPath: elasticsearch/plugin
+        volumes:
+          - name: skywalking-data
+            persistentVolumeClaim:
+              claimName: skywalking-pvc
 

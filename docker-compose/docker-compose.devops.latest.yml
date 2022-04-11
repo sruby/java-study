@@ -45,13 +45,15 @@ services:
       - 12800:12800
     volumes:
       - ./devops/skywalking/config:/apache-skywalking-apm-bin/config:ro
+#      - ./devops/skywalking/log:/
     environment:
       SW_STORAGE: elasticsearch
       SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
       SW_HEALTH_CHECKER: default
       SW_TELEMETRY: prometheus
-      JAVA_OPTS: "-Xms512m -Xmx512m -Duser.timezone=Asia/Shanghai"
-#      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms256m -Xmx256m"
+      TZ: Asia/Shanghai
+      oap.logDir:
 
   skywalking-ui:
     image: apache/skywalking-ui:8.9.1
@@ -66,46 +68,10 @@ services:
     ports:
       - 8080:8080
     environment:
-      collector.ribbon.listOfServers: skywalking-oap:12800
-#      TZ: Asia/Shanghai
-      JAVA_OPTS: "-Xms256m -Xmx256m -Duser.timezone=Asia/Shanghai"
+      SW_OAP_ADDRESS: http://skywalking-oap:12800
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms256m -Xmx256m"
 
-  rabbitmq:
-    image: rabbitmq:3.9.1-management
-    container_name: rabbitmq
-    networks:
-      - sy-net
-    ports:
-      - 15672:15672
-      - 5672:5672
-
-  redis:
-    image: redis:6.2.5-alpine3.14
-    container_name: redis
-    networks:
-      - sy-net
-    ports:
-      - 6379:6379
-
-#  oracle:
-#    image: store/oracle/database-enterprise:12.2.0.1
-#    container_name: oracle
-#    networks:
-#      - sy-net
-#    ports:
-#      - 1521:1521
-
-#  skywalking-demo:
-#      image: sruby/skywalking-demo:latest
-#      container_name: skywalking-demo
-#      networks:
-#            - sy-net
-#      restart: always
-#      ports:
-#        - 8079:8079
-#      env_file: .env
-#      environment:
-#        TZ: Asia/Shanghai
 networks:
   sy-net:
 #  If set to true, specifies that this network has been created outside of Compose. docker-compose up does not attempt to create it, and raises an error if it doesn’t exist.

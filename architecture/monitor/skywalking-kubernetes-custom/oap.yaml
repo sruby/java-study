@@ -45,6 +45,14 @@ spec:
             value: "elasticsearch7"
           - name:  "SW_STORAGE_ES_CLUSTER_NODES"
             value: "elasticsearch:9200"
+        volumeMounts:
+          - name: skywalking-data
+            mountPath: /skywalking/config
+            subPath: apache-skywalking/config
+      volumes:
+        - name: skywalking-data
+          persistentVolumeClaim:
+            claimName: skywalking-pvc
       # affinity:
       #   podAntiAffinity:
       #     requiredDuringSchedulingIgnoredDuringExecution:
