@@ -36,4 +36,9 @@ public class ConsumerController {
         List<UserDTO> userDTOS = demoClient.saveAndGetDB();
         return userDTOS;
     }
+
+    @GetMapping("/localecho")
+    public String localEcho(String param){
+        return "consumer local echo";
+    }
 }

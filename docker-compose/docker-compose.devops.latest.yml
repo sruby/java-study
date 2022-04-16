@@ -31,7 +31,7 @@ services:
       retries: 3
 
   skywalking-oap:
-    image: apache/skywalking-oap-server:8.9.1
+    image: apache/skywalking-oap-server:9.0.0
     container_name: skywalking-oap
     networks:
       - sy-net
@@ -56,7 +56,7 @@ services:
       oap.logDir:
 
   skywalking-ui:
-    image: apache/skywalking-ui:8.9.1
+    image: apache/skywalking-ui:9.0.0
     container_name: skywalking-ui
     networks:
       - sy-net
