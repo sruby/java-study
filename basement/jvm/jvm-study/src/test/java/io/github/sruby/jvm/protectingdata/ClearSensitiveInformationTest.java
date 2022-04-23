@@ -1,6 +1,9 @@
 package io.github.sruby.jvm.protectingdata;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * TODO
@@ -10,9 +13,11 @@ import org.junit.jupiter.api.Test;
  */
 class ClearSensitiveInformationTest {
 
+    @SneakyThrows
     @Test
     public void test() {
-//        char[] password = new char[10]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+        char[] password = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+        TimeUnit.MINUTES.sleep(100);
     }
 
 }
