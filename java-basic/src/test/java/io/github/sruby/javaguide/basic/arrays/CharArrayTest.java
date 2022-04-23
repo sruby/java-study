@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 public class CharArrayTest {
     @Test
     public void test() {
-
+        char[] charArray = {'a', 'b', 'c'};
+        System.out.println(charArray);
     }
 }
