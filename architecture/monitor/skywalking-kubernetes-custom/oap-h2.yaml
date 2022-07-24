@@ -1,0 +1,64 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  skywalking-oap
+  namespace: skywalking-ns
+spec:
+  selector:
+    app:  skywalking-oap
+  type:  LoadBalancer
+  ports:
+  - name:  p1
+    port:  1234
+  - name:  grpc
+    port: 11800
+  - name: rest
+    port: 12800
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skywalking-oap
+  namespace: skywalking-ns
+spec:
+  selector:
+    matchLabels:
+      app: skywalking-oap
+  template:
+    metadata:
+      labels:
+        app: skywalking-oap
+    spec:
+      containers:
+      - name: skywalking-oap
+        image: apache/skywalking-oap-server:8.6.0-es7
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1234
+        - containerPort: 11800
+        - containerPort: 12800
+        env:
+          - name:  "SW_STORAGE"
+            value: "h2"
+        volumeMounts:
+          - name: skywalking-data
+            mountPath: /skywalking/config
+            subPath: apache-skywalking/config
+      volumes:
+        - name: skywalking-data
+          persistentVolumeClaim:
+            claimName: skywalking-pvc
+      # affinity:
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - elasticsearch
+      #       topologyKey: kubernetes.io/hostname
+          

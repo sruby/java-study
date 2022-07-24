@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<!-- 控制台 Appender -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- 日志的格式化 -->
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	<!-- 设置 Appender -->
+	<root level="debug">
+		<appender-ref ref="console"/>
+	</root>
+	<logger name="reactor.netty.http.client" level="debug"/>
+	<logger name="reactor.netty.resources" level="debug"/>
+	<logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="debug"/>
+
+</configuration>

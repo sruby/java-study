@@ -1,5 +1,6 @@
 package io.github.sruby.json;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.sruby.annotation.demo.Person;
 import io.github.sruby.bean.Employee;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Test
@@ -24,6 +26,17 @@ public class ObjectMapperTest {
     void readValue() {
         Person person = objectMapper.readValue("{\"name\":\"test\"}", Person.class);
         log.debug("person:{}",person);
+    }
+    @SneakyThrows
+    @Test
+    void readArrayToList(){
+        String jsonInput = "[{\"name\":\"test\"}]";
+        Person[] myObjects = objectMapper.readValue(jsonInput, Person[].class);
+        List<Person> myObjectList = objectMapper.readValue(jsonInput, new TypeReference<List<Person>>(){});
+
+        List<Person> myObjectList2 = objectMapper.readValue(jsonInput, objectMapper.getTypeFactory().constructCollectionType(List.class, Person.class));
+
+
     }
 
     @Test
