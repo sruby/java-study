@@ -15,7 +15,7 @@ class ClearSensitiveInformationTest {
 
     @SneakyThrows
     @Test
-    public void test() {
+    public void charArrayInMemory() {
         char[] password = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
         TimeUnit.MINUTES.sleep(100);
     }
