@@ -15,5 +15,15 @@ public class HttpClientConfig implements BeanPostProcessor {
 			return client.metrics(true, s -> s);
 		}
 		return bean;
+
 	}
+
+//	@Autowired
+//	private HttpClient httpClient;
+//
+//	@Autowired
+//	public WebClient webClient(){
+//		ReactorClientHttpConnector reactorClientHttpConnector = new ReactorClientHttpConnector(httpClient);
+//		return WebClient.builder().clientConnector(reactorClientHttpConnector).build();
+//	}
 }

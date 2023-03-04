@@ -37,6 +37,6 @@
 		<module>jacoco-demo</module>
         <module>middle/framework/swift/swift-demo</module>
 		<module>middle/framework/connection_pool/p6spy/p6spy-springboot-jpa-demo</module>
-        <module>jvm-study</module>
+        <module>basement/jvm/jvm-study</module>
     </modules>
 </project>

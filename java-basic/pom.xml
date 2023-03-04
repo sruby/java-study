@@ -87,6 +87,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.0.M4</version>
+		</dependency>
 		<!--&lt;!&ndash; Hadoop start &ndash;&gt;
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>

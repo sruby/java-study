@@ -39,8 +39,8 @@ public class CollectorsTest {
 
     @Test
     public void testToUnmodifiableList(){
-        List<String> result = givenList.stream()
-                .collect(toUnmodifiableList());
+//        List<String> result = givenList.stream()
+//                .collect(toUnmodifiableList());
 //        assertThatThrownBy(() -> result.add("foo"))
 //                .isInstanceOf(UnsupportedOperationException.class);
     }

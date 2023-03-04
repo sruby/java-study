@@ -3,12 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>labs-parent</artifactId>
-        <groupId>cn.iocoder.springboot.labs</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <properties>
+        <java.version>11</java.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <artifactId>labx-03-spring-cloud-feign</artifactId>
     <packaging>pom</packaging>
     <build>
@@ -25,25 +40,9 @@
     </build>
 
     <modules>
-        <module>labx-03-sc-feign-demo01-provider</module>
-        <module>labx-03-sc-feign-demo01-consumer</module>
-
-        <module>labx-03-sc-feign-demo02A-consumer</module>
-        <module>labx-03-sc-feign-demo02B-consumer</module>
-
         <module>labx-03-sc-feign-demo03-provider-api</module>
         <module>labx-03-sc-feign-demo03-provider</module>
         <module>labx-03-sc-feign-demo03-consumer</module>
-
-        <module>labx-03-sc-feign-demo04-provider</module>
-        <module>labx-03-sc-feign-demo04-consumer</module>
-
-        <module>labx-03-sc-feign-demo05-consumer</module>
-
-        <module>labx-03-sc-feign-demo06A-consumer</module>
-        <module>labx-03-sc-feign-demo06B-consumer</module>
-
-        <module>labx-03-sc-feign-demo07-consumer</module>
     </modules>
 
 </project>
