@@ -3,8 +3,6 @@ package io.github.sruby.arithmetic.sort;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @date 2020/7/8 9:46
  */
@@ -23,6 +21,19 @@ public class BubbleSortTest {
     public void test() {
         int[] array = new int[]{3,5,4,2,1,6};
         bubbleSort.sort(array);
+        log.debug("array:{}",array);
+    }
+
+    @Test
+    public void sort2() {
+        int[] array = new int[]{1,8,9,3,0,222};
+        bubbleSort.sort2(array);
+        log.debug("array:{}",array);
+    }
+    @Test
+    public void sort2_with_repeat() {
+        int[] array = new int[]{1,8,9,3,0,1,1,1,1,222};
+        bubbleSort.sort2(array);
         log.debug("array:{}",array);
     }
 }
