@@ -1,12 +1,8 @@
 package io.github.sruby.lambda;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import org.junit.Test;
+
+import java.util.*;
 
 public class LambdaTest
 {
@@ -14,6 +10,12 @@ public class LambdaTest
 	public static void main(String[] args)
 	{
 		
+	}
+
+	@Test
+	public void test() {
+//		boolean test = () > 5;
+
 	}
 	
 	public void runThread()
