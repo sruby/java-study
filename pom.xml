@@ -39,5 +39,6 @@
 		<module>middle/framework/connection_pool/p6spy/p6spy-springboot-jpa-demo</module>
         <module>advanced/arithmetic/arithmetic</module>
 		<module>basement/jvm/jvm-study</module>
-    </modules>
+		<module>advanced/db/redis/redission-demo</module>
+	</modules>
 </project>

@@ -1,0 +1,10 @@
+/basement/jvm/jvm-study/fullgcdemo-dump.*.index
+/basement/jvm/jvm-study/fullgcdemo-dump_Leak_Suspects.zip
+/basement/jvm/jvm-study/fullgcdemo-dump.threads
+/basement/jvm/jvm-study/fullgcdemo-dump.index
+/basement/jvm/jvm-study/fullgcdemo-dump.hprof
+/data/elasticsearch/data/nodes/0/
+/data/elasticsearch/logs/
+java-basic/src/test/java/io/github/sruby/new_file_0
+.idea/
+java-basic/target/
