@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * stream merge test
@@ -14,62 +16,74 @@ import java.util.stream.Collectors;
  * @date 5/12/2023 7:49 PM
  */
 public class StreamMergeTest {
+
     @Test
-    public void test() {
-        List<Person> list1 = new ArrayList<>();
-        list1.add(new Person("张三", 20));
-        list1.add(new Person("李四", 25));
+    public void testFullJoin1() {
+        List<ReceivableFeeSummaryItemDTO> list1 = new ArrayList<>();
+        list1.add(new ReceivableFeeSummaryItemDTO(1, 100, 50, 150));
+        list1.add(new ReceivableFeeSummaryItemDTO(2, 200, 100, 300));
+        list1.add(new ReceivableFeeSummaryItemDTO(3, 300, 150, 450));
 
-        List<Person> list2 = new ArrayList<>();
-        list2.add(new Person("王五", 30));
-        list2.add(new Person("张三", 35));
+        List<ReceivableFeeSummaryItemDTO> list2 = new ArrayList<>();
+        list2.add(new ReceivableFeeSummaryItemDTO(1, 1000, 500, 1500));
+        list2.add(new ReceivableFeeSummaryItemDTO(2, 2000, 1000, 3000));
+        list2.add(new ReceivableFeeSummaryItemDTO(4, 400, 200, 600));
 
-        Map<String, List<Person>> map1 = list1.stream().collect(Collectors.groupingBy(Person::getName));
-        Map<String, List<Person>> map2 = list2.stream().collect(Collectors.groupingBy(Person::getName));
+        Map<Long, ReceivableFeeSummaryItemDTO> mergedMap = new HashMap<>();
 
-        Map<String, List<Person>> result = new HashMap<>();
+        for (ReceivableFeeSummaryItemDTO dto : list1) {
+            mergedMap.put(dto.getId(), dto);
+        }
 
-        map1.forEach((key, value) -> result.merge(key, value, (oldValue, newValue) -> {
-            oldValue.addAll(newValue);
-            return oldValue;
-        }));
-
-        map2.forEach((key, value) -> result.merge(key, value, (oldValue, newValue) -> {
-            oldValue.addAll(newValue);
-            return oldValue;
-        }));
-
-        result.forEach((key, value) -> {
-            if (value.size() < 2) {
-                value.add(new Person(key, -1));
+        for (ReceivableFeeSummaryItemDTO dto : list2) {
+            long key = dto.getId();
+            ReceivableFeeSummaryItemDTO value = mergedMap.get(key);
+            if (value == null) {
+                // If the key doesn't exist in the merged map, add it
+                mergedMap.put(key, dto);
+            } else {
+                // If the key does exist, add the values together
+                value.setTotalReceivableFee(value.getTotalReceivableFee() + dto.getTotalReceivableFee());
+                value.setTotalReceivableFeeTax(value.getTotalReceivableFeeTax() + dto.getTotalReceivableFeeTax());
+                value.setTotalReceivableFeeWithTax(value.getTotalReceivableFeeWithTax() + dto.getTotalReceivableFeeWithTax());
             }
-        });
+        }
 
-        List<Person> listResult = result.values().stream()
-                .flatMap(Collection::stream)
-                .distinct()
-                .collect(Collectors.toList());
+        List<ReceivableFeeSummaryItemDTO> result = new ArrayList<>(mergedMap.values());
 
-        listResult.forEach(person -> System.out.println(person.getName() + " : " + person.getAge()));
+        System.out.println("Merged List: " + result);
     }
 
-    public class Person {
-        private String name;
-        private int age;
+    @Test
+    public void testFullJoin2() {
+        List<ReceivableFeeSummaryItemDTO> list1 = new ArrayList<>();
+        list1.add(new ReceivableFeeSummaryItemDTO(1, 100, 50, 150));
+        list1.add(new ReceivableFeeSummaryItemDTO(2, 200, 100, 300));
+        list1.add(new ReceivableFeeSummaryItemDTO(3, 300, 150, 450));
+        list1.add(new ReceivableFeeSummaryItemDTO(6, 610, 1150, 4150));
 
-        public Person(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
+        List<ReceivableFeeSummaryItemDTO> list2 = new ArrayList<>();
+        list2.add(new ReceivableFeeSummaryItemDTO(1, 1000, 500, 1500));
+        list2.add(new ReceivableFeeSummaryItemDTO(2, 2000, 1000, 3000));
+        list2.add(new ReceivableFeeSummaryItemDTO(4, 400, 200, 600));
 
-        public String getName() {
-            return name;
-        }
+        Map<Long, ReceivableFeeSummaryItemDTO> mergedMap = Stream.concat(list1.stream(), list2.stream())
+                .collect(Collectors.toMap(
+                        ReceivableFeeSummaryItemDTO::getId,
+                        Function.identity(),
+                        (v1, v2) -> {
+                            // Combine values for matching keys
+                            v1.setTotalReceivableFee(v1.getTotalReceivableFee() + v2.getTotalReceivableFee());
+                            v1.setTotalReceivableFeeTax(v1.getTotalReceivableFeeTax() + v2.getTotalReceivableFeeTax());
+                            v1.setTotalReceivableFeeWithTax(v1.getTotalReceivableFeeWithTax() + v2.getTotalReceivableFeeWithTax());
+                            return v1;
+                        }));
 
-        public int getAge() {
-            return age;
-        }
+        List<ReceivableFeeSummaryItemDTO> result = new ArrayList<>(mergedMap.values());
+        System.out.println("Merged List: " + result);
+
     }
+
 
 
 }
