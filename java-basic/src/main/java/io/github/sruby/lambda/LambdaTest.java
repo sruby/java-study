@@ -1,9 +1,11 @@
 package io.github.sruby.lambda;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.*;
 
+@Slf4j
 public class LambdaTest
 {
 	
@@ -14,8 +16,8 @@ public class LambdaTest
 
 	@Test
 	public void test() {
-//		boolean test = () > 5;
-
+		boolean test = () > 5;
+		log.info("test:",test);
 	}
 	
 	public void runThread()
@@ -67,9 +69,7 @@ public class LambdaTest
 		
 		System.out.println(list);
 		
-		Collections.sort(list, (String o1, String o2) -> {
-			return o1.compareTo(o2);
-		});
+		Collections.sort(list, Comparator.naturalOrder());
 		System.out.println(list);
 	}
 	
