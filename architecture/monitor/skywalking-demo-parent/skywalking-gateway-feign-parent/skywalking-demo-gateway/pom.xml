@@ -6,32 +6,11 @@
     <groupId>io.github.sruby</groupId>
     <artifactId>skywalking-demo-gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.5.8</spring-boot.version>
-        <spring-cloud-denpendencies.version>2020.0.4</spring-cloud-denpendencies.version>
-        <spring-cloud-stream.version>3.0.6-RELEASE</spring-cloud-stream.version>
-    </properties>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.8</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>io.github.sruby</groupId>
+        <artifactId>skywalking-gateway-feign-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-denpendencies.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>

@@ -3,7 +3,6 @@ package io.github.sruby.skywalking.api;
 import io.github.sruby.skywalking.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -14,23 +13,23 @@ import java.util.List;
  * @create: 2021-08-04 15:13
  */
 @FeignClient(name = "skywalking-demo-server",url = "127.0.0.1:8079")
-@RequestMapping("/demo")
+//@RequestMapping("/demo")
 public interface DemoClient {
-    @GetMapping("/echo")
+    @GetMapping("/demo/echo")
     public String echo(@RequestParam("param") String param) throws InterruptedException;
 
-    @GetMapping("/hello")
+    @GetMapping("/demo/hello")
     public String hello() throws InterruptedException;
 
-    @GetMapping("/getDataFromRedis")
+    @GetMapping("/demo/getDataFromRedis")
     public String getDataFromRedis();
 
-    @GetMapping("/produceMeg")
+    @GetMapping("/demo/produceMeg")
     public String produceMeg();
 
-    @GetMapping("/consumerMeg")
+    @GetMapping("/demo/consumerMeg")
     public String consumerMeg();
 
-    @GetMapping("/saveAndGetDB")
+    @GetMapping("/demo/saveAndGetDB")
     public List<UserDTO> saveAndGetDB();
 }
