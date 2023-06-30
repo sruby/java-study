@@ -1,5 +1,6 @@
 package io.github.sruby.arithmetic.listnode;
 
+
 public class ListNode {
       public int val;
       public ListNode next;
