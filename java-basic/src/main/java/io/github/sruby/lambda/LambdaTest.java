@@ -1,5 +1,6 @@
 package io.github.sruby.lambda;
 
+import com.google.common.base.Supplier;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -16,10 +17,26 @@ public class LambdaTest
 
 	@Test
 	public void test() {
-		boolean test = () > 5;
-		log.info("test:",test);
+		Supplier<Integer> integerCopier = () -> 5;
+		log.info("test:{}",integerCopier.get());
 	}
-	
+
+	// 定义一个函数式接口
+	interface MyFunction {
+		int getValue();
+	}
+
+//	public class LambdaExample {
+//		public static void main(String[] args) {
+//			// 将Lambda表达式赋值给函数式接口变量
+//			MyFunction myFunction = () -> 5;
+//
+//			// 调用函数式接口的方法，输出5
+//			System.out.println(myFunction.getValue());
+//		}
+//	}
+
+
 	public void runThread()
 	{
 		new Thread(new Runnable()
