@@ -6,6 +6,13 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
+
+/**
+ * VM:
+ * -javaagent:/Users/macuser/soft/apache-skywalking-java-agent-8.16.0/skywalking-agent.jar=agent.instance_name=demo-gateway,agent.namespace=sruby-namespace,agent.keep_tracing=true
+ * ENV:
+ * SW_AGENT_NAME=demo-application;SW_AGENT_COLLECTOR_BACKEND_SERVICES=127.0.0.1:11800;SW_AGENT_SPAN_LIMIT=2000;SW_NAMESPACE=sruby-demo;SW_SEARCHABLE_TAG_KEYS=http.method,status_code,db.type,db.instance,mq.queue,mq.topic,mq.broker,tag.demo
+ */
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
