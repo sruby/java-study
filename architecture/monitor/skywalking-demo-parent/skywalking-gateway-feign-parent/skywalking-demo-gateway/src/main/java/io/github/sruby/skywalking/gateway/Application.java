@@ -21,6 +21,7 @@ public class Application {
 
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
+
         return builder.routes()
                 .route(p -> p
                         .path("/consumer/{segment}")

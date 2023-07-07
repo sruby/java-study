@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-cloud-denpendencies.version>2021.0.7</spring-cloud-denpendencies.version>
+        <apm-toolkit.version>8.16.0</apm-toolkit.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -30,6 +31,16 @@
                 <version>${spring-cloud-denpendencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-log4j-2.x</artifactId>
+                <version>${apm-toolkit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-trace</artifactId>
+                <version>${apm-toolkit.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
