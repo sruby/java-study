@@ -18,34 +18,28 @@ public class MergeTwoSortedLists {
 
         // 虚拟头结点
         ListNode dummy = new ListNode(-1);
+        ListNode p = dummy;
+        ListNode p1 = list1;
+        ListNode p2 = list2;
 
-        while ( list1 !=null && list2 !=null){
-            if (list1.val > list2.val){
-                dummy.next = list2;
-                list2 = list2.next;
+        while ( p1 !=null && p2 !=null){
+            if (p1.val > p2.val){
+                p.next = p2;
+                p2 = p2.next;
+
+                if (p2 == null){
+                    p.next = p1;
+                }
             }else {
-                dummy.next = list1;
-                list1 = list1.next;
+                p.next = p1;
+                p1 = p1.next;
+                if (p1 == null){
+                    p.next = p2;
+                }
             }
-
-//            if ()
+            p = p.next;
         }
 
         return dummy.next;
-
-    }
-
-    public static void main(String[] args) {
-        ListNode listNode1 = new ListNode(1);
-
-        ListNode p1 = listNode1;
-
-        ListNode dump = new ListNode(-1);
-
-        dump.next = p1;
-        p1 = listNode1.next;
-
-        System.out.println(dump.next.val); // 1
-        System.out.println(p1 == null);  //true
     }
 }
