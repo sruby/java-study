@@ -1,5 +1,8 @@
 package io.github.sruby.arithmetic.listnode;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
  * 23. Merge k Sorted Lists
  *
@@ -16,61 +19,27 @@ public class MergeKSortedLists {
         {
             return null;
         }
-
+        // 虚拟头结点
         ListNode dummy = new ListNode(-1);
-        dummy.next = lists[0];
-        int skipIndex = 0;
 
-        /**
-         * 找出val 最小的 listnode
-         */
-        for (int i = 1; i<lists.length; i++){
-            if (lists[i].val < dummy.val){
-                dummy.next = lists[i];
-                skipIndex = i;
+        ListNode point = dummy;
+        // 优先级队列，最小堆
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, Comparator.comparingInt(listNode -> listNode.val));
+        // 将 k 个链表的头结点加入最小堆
+        for (ListNode head :lists){
+            if (head !=null){
+                pq.add(head);
             }
         }
 
-        for (int i = 0; i<lists.length; i++){
-            if (i == skipIndex){
-                continue;
+        while (!pq.isEmpty()){
+            // 获取最小节点，接到结果链表中
+            ListNode listNode = pq.poll();
+            point.next = listNode;
+            if (listNode.next !=null){
+                pq.add(listNode.next);
             }
-            ListNode listNode = lists[i];
-            ListNode innerPoint = listNode;
-            ListNode point = dummy.next;
-            ListNode currentPoint = dummy;
-
-            while (innerPoint != null){
-                if (innerPoint.val < point.val){
-                    ListNode temp = innerPoint.next;
-                    currentPoint.next = innerPoint;
-
-                    currentPoint = innerPoint;
-                    innerPoint.next = point;
-
-                    innerPoint = temp;
-                }else {
-                    while (point !=null){
-                        if (innerPoint.val < point.val){
-                            ListNode temp = innerPoint.next;
-
-                            innerPoint.next = point;
-                            currentPoint.next = innerPoint;
-                            currentPoint = currentPoint.next;
-
-                            innerPoint = temp;
-                            break;
-                        }else {
-                            ListNode temp2 = point.next;
-
-                            point.next = innerPoint;
-                            currentPoint = point;
-
-                            point = temp2;
-                        }
-                    }
-                }
-            }
+            point = point.next;
         }
 
         return dummy.next;
