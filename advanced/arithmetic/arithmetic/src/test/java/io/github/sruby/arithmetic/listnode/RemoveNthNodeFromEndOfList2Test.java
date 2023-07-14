@@ -3,9 +3,18 @@ package io.github.sruby.arithmetic.listnode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class RemoveNthNodeFromEndOfListTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * test
+ *
+ * @author Sruby
+ * @date 7/14/2023 12:08 PM
+ */
+class RemoveNthNodeFromEndOfList2Test {
+
     @Test
-    public void testRemoveNthFromEnd() {
+    void removeNthFromEnd() {
         // 创建一个链表: 1->2->3->4->5
         ListNode head = new ListNode(1);
         ListNode node1 = new ListNode(2);
@@ -17,7 +26,7 @@ public class RemoveNthNodeFromEndOfListTest {
         node2.next = node3;
         node3.next = node4;
 
-        RemoveNthNodeFromEndOfList removeNthNodeFromEndOfList = new RemoveNthNodeFromEndOfList();
+        RemoveNthNodeFromEndOfList2 removeNthNodeFromEndOfList = new RemoveNthNodeFromEndOfList2();
 
         // 删除倒数第2个节点，预期结果为: 1->2->3->5
         ListNode result = removeNthNodeFromEndOfList.removeNthFromEnd(head, 2);
@@ -26,13 +35,13 @@ public class RemoveNthNodeFromEndOfListTest {
         Assertions.assertEquals(3, result.next.next.val);
         Assertions.assertEquals(5, result.next.next.next.val);
         Assertions.assertNull(result.next.next.next.next);
-        
+
         // 测试链表为空的情况
         result = removeNthNodeFromEndOfList.removeNthFromEnd(null, 1);
         Assertions.assertNull(result);
 
         // 测试n大于链表长度的情况
 //        result = removeNthNodeFromEndOfList.removeNthFromEnd(head, 10);
-//        Assertions.assertNull(result);
+//        Assertions.assertNotNull(result);
     }
 }

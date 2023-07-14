@@ -2,6 +2,7 @@ package io.github.sruby.arithmetic.listnode;
 
 /**
  * 19. Remove Nth Node From End of List
+ * 遍历2遍的解法
  *
  * @author Sruby
  * @date 7/13/2023 5:41 PM
@@ -24,7 +25,7 @@ public class RemoveNthNodeFromEndOfList {
         }
 
         if (n > length){
-            return null;
+            return head;
         }
 
         if (n == length){
