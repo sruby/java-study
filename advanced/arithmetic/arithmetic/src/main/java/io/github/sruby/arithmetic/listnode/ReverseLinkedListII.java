@@ -8,7 +8,10 @@ package io.github.sruby.arithmetic.listnode;
  */
 public class ReverseLinkedListII {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        
-        return null;
+        /**
+         * 移动到left
+         */
+
+        return head;
     }
 }

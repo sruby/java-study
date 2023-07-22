@@ -22,7 +22,8 @@ public class ReverseLinkedList {
         }
         //递归传入下一个节点，目的是为了到达最后一个节点
         ListNode newHead = reverseList(head.next);
-                /*
+        System.out.println(newHead.val);
+            /*
             第一轮出栈，head为5，head.next为空，返回5
             第二轮出栈，head为4，head.next为5，执行head.next.next=head也就是5.next=4，
                       把当前节点的子节点的子节点指向当前节点
@@ -45,6 +46,8 @@ public class ReverseLinkedList {
          */
         head.next.next = head;
         head.next = null;
+
+        //把新的head层层返回
         return newHead;
     }
 }
