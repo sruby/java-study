@@ -40,5 +40,6 @@
         <module>advanced/arithmetic/arithmetic</module>
 		<module>basement/jvm/jvm-study</module>
 		<module>advanced/db/redis/redission-demo</module>
-	</modules>
+        <module>advanced/interview/interview-examination</module>
+    </modules>
 </project>
