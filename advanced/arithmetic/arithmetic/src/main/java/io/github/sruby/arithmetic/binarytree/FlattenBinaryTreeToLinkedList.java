@@ -12,17 +12,27 @@ public class FlattenBinaryTreeToLinkedList {
             return ;
         }
 
-        if (root.left == null || root.right == null){
-            return ;
-        }
-
-        TreeNode temp = root.right;
-        root.right = root.left;
-        root.left = null;
-        root.right.right = temp;
-        root.right.left = null;
-
         flatten(root.left);
         flatten(root.right);
+
+        TreeNode oldLeft = root.left;
+        TreeNode oldRight = root.right;
+
+        /**
+         * 左节点变成又节点，左节点设置为null
+         */
+        root.right = oldLeft;
+        root.left = null;
+
+        /**
+         * 原有右节点接到新的右节点末尾
+         *
+         */
+        TreeNode point = root.right;
+        while (point.right !=null){ //point.right !=null 而不是 point !=null,叶子节点的right是null，会导致空指针
+            point = point.right;
+        }
+        point.right = oldRight;
+
     }
 }
