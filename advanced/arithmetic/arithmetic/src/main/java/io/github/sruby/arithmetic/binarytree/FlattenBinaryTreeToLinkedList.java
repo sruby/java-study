@@ -18,6 +18,9 @@ public class FlattenBinaryTreeToLinkedList {
         TreeNode oldLeft = root.left;
         TreeNode oldRight = root.right;
 
+        /**** 后序遍历位置 ****/
+        //左右子树已经被拉平成一条链表
+//       先递归遍历左右子树,然后再处理根节点,符合后序遍历的特点。
         /**
          * 左节点变成又节点，左节点设置为null
          */
