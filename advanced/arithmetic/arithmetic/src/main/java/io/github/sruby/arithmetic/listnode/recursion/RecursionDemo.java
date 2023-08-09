@@ -9,24 +9,40 @@ package io.github.sruby.arithmetic.listnode.recursion;
 public class RecursionDemo {
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5};
-        printArr(arr,arr.length-1);
-
-        int result = search(arr, 3);
-        System.out.println(result);
+//        printArr(arr,0);
+        reversEprintArr(arr,0);
+//
+//        int result = search(arr, 3);
+//        System.out.println(result);
     }
 
     /**
-     * 打印数组中的数值
+     * 顺序打印数组中的数值（类似二叉树的前序遍历，在递归之前打印）
      * @param arr
      * @param index
      */
     public static void printArr(int[] arr, int index){
-        if (index < 0){
+        if (index >= arr.length){
             return;
         }
 
         System.out.println(arr[index]);
-        printArr(arr,--index);
+        printArr(arr,++index);
+    }
+    /**
+     * 倒序打印数组中的数值（类似二叉树的后序遍历，在递归之后打印）
+     * @param arr
+     * @param index
+     */
+    public static void reversEprintArr(int[] arr, int index){
+        if (index >= arr.length){
+            return;
+        }
+        // 传递 index + 1，保持索引不变
+//        reversEprintArr(arr,++index);
+        reversEprintArr(arr,index+1);
+
+        System.out.println(arr[index]);
     }
 
     public static int search(int[] arr, int targetVal){
