@@ -33,7 +33,7 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
 
         int rootVal = postorder[postRight];
         Integer inRootIndex = indexMap.get(rootVal);
-        int leftSubTreeSize = inRootIndex - inLeft + 1;
+        int leftSubTreeSize = inRootIndex - inLeft;
 
         TreeNode root = new TreeNode(rootVal);
         System.out.println(inLeft+","+(inRootIndex -1)+","+postLeft+","+(postLeft+leftSubTreeSize-1));
