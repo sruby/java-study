@@ -16,42 +16,76 @@ public class ReverseLinkedListII {
      * @return
      */
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        /**
-         * 移动 left-1，找到 pre 前驱节点
-         * 移动 right,找到successor 后继节点
-         */
-        ListNode dump = new ListNode(-1);
-        dump.next = head;
-        ListNode pre = head;
-        ListNode successor = null;
 
-        for (int i = 0; i < right ; i++){
-            if (i < left -2){
-                pre = pre.next;
-            }else if(i == left - 2){
-                successor = pre;
-            }else {
-                successor = successor.next;
-            }
+        ListNode leftNode = head;
+
+        /**
+         * 移动left-2，找到 leftNode节点
+         */
+        for (int i = 0; i < left -2 ; i++){
+            leftNode = leftNode.next;
         }
+
+        /**
+         * nextLeftNode
+         */
+        ListNode nextLeftNode;
+        if (left == 1){
+            nextLeftNode = leftNode;
+        }else {
+            nextLeftNode = leftNode.next;
+            //断开left链接
+            leftNode.next = null;
+        }
+
+        /**
+         * 移动right-left,找到rightNode
+         */
+        ListNode rightNode = nextLeftNode;
+        //head = [1]
+//        if (rightNode == null){
+//            return head;
+//        }
+        for (int i = 0; i < right - left; i++){
+            rightNode = rightNode.next;
+        }
+
+        ListNode nextRightNode = rightNode.next;
+
+        //断开right链接
+        rightNode.next = null;
 
         /**
          * 反转中间部分
          */
-        ListNode newHead = pre.next;
-        reverseList(newHead);
+        ListNode reversedList = reverseList(nextLeftNode);
 
-        return head;
+        if (left != 1){
+            leftNode.next = reversedList;
+            nextLeftNode.next = nextRightNode;
+            return head;
+        }else {
+            nextLeftNode.next = nextRightNode;
+            return reversedList;
+        }
     }
 
+    /**
+     * 反转链表
+     * @param newHead
+     * @return
+     */
     private ListNode reverseList(ListNode newHead) {
-        ListNode p = newHead;
-        while (p.next !=null){
-            ListNode temp = p.next;
-            p.next.next = p;
-            p.next = null;
-            p = temp;
+        ListNode cur = newHead;
+        ListNode pre = null;
+        while (cur !=null){
+            ListNode temp = cur.next;
+            cur.next = pre;
+
+            pre = cur;
+            cur = temp;
         }
-        return p.next;
+//        return pre 而不是cur,cur最后会是null
+        return pre;
     }
 }
