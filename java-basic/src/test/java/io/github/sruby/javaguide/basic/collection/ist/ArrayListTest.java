@@ -20,4 +20,12 @@ public class ArrayListTest {
             log.debug("integer:{}",integer);
         }
     }
+
+    @Test
+    public void test_full() {
+        List<Integer> list =new ArrayList(2);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+    }
 }
