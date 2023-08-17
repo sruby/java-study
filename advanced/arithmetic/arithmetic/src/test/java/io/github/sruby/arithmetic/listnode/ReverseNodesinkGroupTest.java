@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  * @date 1/8/2023 17:10
  */
 class ReverseNodesinkGroupTest {
-    private ReverseNodesinkGroup reverseNodesinkGroup = new ReverseNodesinkGroup();
+    private ReverseNodesInKGroup reverseNodesinkGroup = new ReverseNodesInKGroup();
     @Test
     public void test() {
         ListNode listNode = new ListNode(1);

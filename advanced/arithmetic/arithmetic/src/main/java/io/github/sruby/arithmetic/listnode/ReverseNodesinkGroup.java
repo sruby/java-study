@@ -6,7 +6,7 @@ package io.github.sruby.arithmetic.listnode;
  * @author Sruby
  * @date 1/8/2023 16:55
  */
-public class ReverseNodesinkGroup {
+public class ReverseNodesInKGroup {
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head == null){
             return null;
