@@ -2,8 +2,6 @@ package io.github.sruby.arithmetic.binarytree;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * test
  *
@@ -11,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @date 17/8/2023 17:25
  */
 class SerializeAndDeserializeBinaryTreeTest {
-    private SerializeAndDeserializeBinaryTree serializeAndDeserializeBinaryTree = new SerializeAndDeserializeBinaryTree();
+    private SerializeAndDeserializeBinaryTree_preorder serializeAndDeserializeBinaryTree = new SerializeAndDeserializeBinaryTree_preorder();
 
     @Test
     void serialize() {

@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @author Sruby
  * @date 17/8/2023 17:17
  */
-public class SerializeAndDeserializeBinaryTree {
+public class SerializeAndDeserializeBinaryTree_preorder {
 
     private static final String NULL_MARKER = "#";
     private static final String DELIMITER = ",";
@@ -40,12 +40,13 @@ public class SerializeAndDeserializeBinaryTree {
         if (dataList.isEmpty()){
             return null;
         }
-
+//第一个是根节点
         String rootVal = dataList.removeFirst();
         if ( rootVal.equals(NULL_MARKER)){
             return null;
         }
         TreeNode root = new TreeNode(Integer.valueOf(rootVal));
+//      先递归反序列化左子树，再反序列化右子树
         root.left = deserialize(dataList);
         root.right = deserialize(dataList);
         return root;
