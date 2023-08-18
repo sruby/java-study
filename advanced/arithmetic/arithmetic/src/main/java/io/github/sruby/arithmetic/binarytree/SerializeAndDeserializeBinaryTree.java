@@ -1,5 +1,6 @@
 package io.github.sruby.arithmetic.binarytree;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -9,42 +10,44 @@ import java.util.LinkedList;
  * @date 17/8/2023 17:17
  */
 public class SerializeAndDeserializeBinaryTree {
+
+    private static final String NULL_MARKER = "#";
+    private static final String DELIMITER = ",";
+
+
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
         if (root == null){
-            return "#";
+            return NULL_MARKER;
         }
 
-        return root.val + serialize(root.left) + serialize(root.right);
+        return root.val+ DELIMITER + serialize(root.left) +DELIMITER+ serialize(root.right);
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-
-
         if (data == null || data.length() == 0){
             return  null;
         }
 
-        LinkedList<Character> dataList = new LinkedList<>();
-
-        for (int i = 0 ;i< data.length(); i ++){
-            dataList.add(data.charAt(i));
-        }
+        LinkedList<String> dataList = new LinkedList<>(Arrays.asList(data.split(DELIMITER)));
 
         return deserialize(dataList);
 
     }
 
-    private TreeNode deserialize(LinkedList<Character> dataList) {
-        Character rootVal = dataList.removeFirst();
-        if (dataList.isEmpty() || rootVal.equals("#")){
+    private TreeNode deserialize(LinkedList<String> dataList) {
+        if (dataList.isEmpty()){
             return null;
         }
 
-        TreeNode root = new TreeNode(rootVal);
+        String rootVal = dataList.removeFirst();
+        if ( rootVal.equals(NULL_MARKER)){
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.valueOf(rootVal));
         root.left = deserialize(dataList);
         root.right = deserialize(dataList);
-        return null;
+        return root;
     }
 }
