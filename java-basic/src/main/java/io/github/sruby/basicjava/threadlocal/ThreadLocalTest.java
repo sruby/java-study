@@ -29,14 +29,7 @@ public class ThreadLocalTest
 		testThread3.start();
 	}
 	
-	private ThreadLocal<Integer> seqNum = new ThreadLocal<Integer>()
-			{
-				@Override
-				public Integer initialValue()
-				{
-					return 0;
-				}
-			};
+	private ThreadLocal<Integer> seqNum = ThreadLocal.withInitial(() -> 0);
 	
 	
 	

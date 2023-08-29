@@ -1,5 +1,7 @@
 package io.github.sruby.spring.dao.po;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,6 +9,7 @@ import java.util.Date;
  * 用户对象
  * @author sruby on 2018年3月30日 下午5:53:12
  */
+@Data
 public class User implements Serializable
 {
     private int userId;
