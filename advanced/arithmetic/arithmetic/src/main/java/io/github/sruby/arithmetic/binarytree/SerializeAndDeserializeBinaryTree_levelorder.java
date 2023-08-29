@@ -2,6 +2,7 @@ package io.github.sruby.arithmetic.binarytree;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -30,27 +31,54 @@ public class SerializeAndDeserializeBinaryTree_levelorder {
         while (!queue.isEmpty()){
             TreeNode item = queue.poll();
 
-            stringBuffer.append(item).append(DELIMITER);
+            if (item == null){
+                stringBuffer.append(NULL_MARKER).append(DELIMITER);
+                continue;
+            }
+
+            stringBuffer.append(item.val).append(DELIMITER);
 
             TreeNode left = item.left;
-            if (left == null){
-                stringBuffer.append(NULL_MARKER).append(DELIMITER);
-                continue;
-            }
-
             TreeNode right = item.right;
-            if (right == null){
-                stringBuffer.append(NULL_MARKER).append(DELIMITER);
-                continue;
-            }
-
-
+            queue.offer(left);
+            queue.offer(right);
         }
+        return stringBuffer.toString();
     }
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        
+        List<String> list = Arrays.asList(data.split(DELIMITER));
+
+        String rootVal = list.get(0);
+        TreeNode root = new TreeNode(Integer.valueOf(rootVal));
+
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        int index = 1;
+
+        while (!queue.isEmpty()){
+            for (int i = 0; i< queue.size(); i ++){
+                TreeNode item = queue.poll();
+                String leftVal = list.get(index);
+                index ++;
+                if (!NULL_MARKER.equals(leftVal)){
+                    TreeNode left = new TreeNode(Integer.parseInt(leftVal));
+                    item.left = left;
+                    queue.offer(left);
+                }
+
+                String rightVal = list.get(index);
+                index ++;
+                if (!NULL_MARKER.equals(rightVal)){
+                    TreeNode right = new TreeNode(Integer.parseInt(rightVal));
+                    item.right = right;
+                    queue.offer(right);
+                }
+
+            }
+        }
+        return root;
     }
 
 }
