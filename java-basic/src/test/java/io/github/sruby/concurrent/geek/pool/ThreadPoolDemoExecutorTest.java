@@ -19,7 +19,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  * https://www.baeldung.com/java-rejectedexecutionhandler
  */
 @Slf4j
-public class ThreadPoolExecutorTest {
+public class ThreadPoolDemoExecutorTest {
     ReentrantLock lock = new ReentrantLock();
 
     public class WorkerThreadFactory implements ThreadFactory {
