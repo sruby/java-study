@@ -1,4 +1,5 @@
 def test():
+    # dict
     d1 = {'age':1,'name':'zhangsan'}
     print(d1['age'])
     print(d1['name'])
@@ -6,7 +7,7 @@ def test():
     d2 = dict({'age':1,'name':'zhangsan'})
     print(d2['age'])
 
-
+    # set
     s1 = {1,2,'a',3}
     # print(s1[0]) 'set' object is not subscriptable
     s1.add("b")
