@@ -3,6 +3,7 @@ import time
 import logging
 import requests
 from subprocess import Popen
+import pygetwindow as gw
 
 # Configure logging
 log_file_path = "C:\\sci992_log\\logfile.log"
@@ -41,26 +42,57 @@ open_excel(excel_file_path)
 time.sleep(180)
 
 # Code to check the result and decide if Excel should be closed goes here
+try:
+    window2 = gw.getWindowsWithTitle("提示")[0]
+    window2.activate()
+    logging.info("Confirmation box activated")
+    try:
+        pyautogui.press('esc')
+        # pyautogui.hotkey('alt', '4')
+        logging.info("Confirmation box closed")
+    except Exception as e:
+        logging.error(f"Failed to close the confirmation box: {e}")
 
-# Activate Excel window
-window = pyautogui.getWindowsWithTitle("ALL")[0]
-window.activate()
-logging.info("Excel activated")
+    # Activate Excel window
+    window = gw.getWindowsWithTitle("ALL")[0]
+    window.activate()
+    logging.info("Excel activated")
 
-time.sleep(5)
-# Send Ctrl+S to save
-pyautogui.hotkey('ctrl', 's')
-logging.info("Save command sent")
+    # Press the escape key to close the confirmation box
+    # time.sleep(3)
+    # try:
+    #     pyautogui.press('esc')
+    #     pyautogui.hotkey('alt', '4')
+    #     logging.info("Confirmation box closed")
+    # except Exception as e:
+    #     logging.error(f"Failed to close the confirmation box: {e}")
 
-time.sleep(5)
-logging.info("Waited for 5 seconds after save")
+    time.sleep(3)
+    try:
+        # Send Ctrl+S to save
+        pyautogui.hotkey('ctrl', 's')
+        logging.info("Save command sent")
+    except Exception as e:
+        logging.error(f"Failed to save the Excel file: {e}")
 
-# Close Excel window
-window.close()
-logging.info("Excel window closed")
+    time.sleep(5)
+    logging.info("Waited for 5 seconds after save")
 
-time.sleep(5)
+    try:
+        # Close Excel window
+        window.close()
+        logging.info("Excel window closed")
 
-import_data_url = "http://127.0.0.1:8101/sci992/import?whetherCheck"
-logging.info("Attempting to execute import data command")
-import_data(import_data_url)
+        time.sleep(3)
+        import_data_url = "http://127.0.0.1:8101/sci992/import?whetherCheck"
+        logging.info("Attempting to execute import data command")
+        # import_data(import_data_url)
+    except Exception as e:
+        logging.error(f"Failed to close the Excel window: {e}")
+
+except IndexError:
+    logging.error("Excel window with title 'ALL' was not found.")
+except Exception as e:
+    logging.error(f"An unexpected error occurred: {e}")
+
+
