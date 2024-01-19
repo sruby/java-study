@@ -86,7 +86,7 @@ try:
         time.sleep(3)
         import_data_url = "http://127.0.0.1:8101/sci992/import?whetherCheck"
         logging.info("Attempting to execute import data command")
-        # import_data(import_data_url)
+        import_data(import_data_url)
     except Exception as e:
         logging.error(f"Failed to close the Excel window: {e}")
 
