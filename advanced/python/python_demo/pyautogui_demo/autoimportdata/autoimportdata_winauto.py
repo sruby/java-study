@@ -15,22 +15,22 @@ logging.basicConfig(
     ]
 )
 
+
 # Open Excel file using Popen
 def open_excel(file_path):
-    try:
-        Popen(["start", "excel.exe", file_path], shell=True)
-        logging.info("Excel opened")
-    except Exception as e:
-        logging.error(f"Failed to open Excel: {e}")
+    Popen(["start", "excel.exe", file_path], shell=True)
+    logging.info("Excel opened")
+
 
 # Send a GET request using requests library
 def import_data(url):
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
-        logging.info(f"Data import successful, status code: {response.status_code}")
+        logging.info(f"Data import successful, status code: {response.status_code},message: {response.text}")
     except requests.exceptions.RequestException as e:
         logging.error(f"Error during HTTP request: {e}")
+
 
 # Main script execution
 logging.info("0 - Script started")
