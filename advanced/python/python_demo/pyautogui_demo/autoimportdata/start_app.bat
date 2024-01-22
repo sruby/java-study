@@ -1,4 +1,4 @@
 @echo off
 cd ..
 call venv\Scripts\activate
-python .\autoimportdata\autoimportdata.py
+python .\autoimportdata\autoimportdata_winauto.py

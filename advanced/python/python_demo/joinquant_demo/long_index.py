@@ -1,59 +1,83 @@
-from jqdatasdk import *
-import auth_my
+# 标题：均线策略-沪深300指数5日vs3年均线
 
-auth_my.auth_call()
+def initialize(context):
+    # 设置操作对象和参考标准
+    g.security = '000300.XSHG'
 
-# 设置参考标的
-security = '000300.XSHG'  # 沪深300
-# 设置我们要操作的股票池
-# set_universe([security])
-# # 设置交易条件
-# set_option('use_real_price', True)
-# # 运行频率
-# run_daily(trade, 'every_bar')
-# 初始化交易状态记录
-traded_low3 = False
-traded_low5 = False
-traded_high3 = False
-traded_high5 = False
+    set_benchmark('000300.XSHG')
+    # 设置手续费，指数基金的手续费设置为万一, 每笔交易最低扣5块钱
+    set_commission(PerTrade(buy_cost=0.0001, sell_cost=0.0001, min_cost=5))
+    # 千分之一的滑点费用
+    set_slippage(FixedSlippage(0.001))
 
-# 每天交易时
-def trade(context):
-    global traded_low3
-    global traded_low5
-    global traded_high3
-    global traded_high5
 
-    # 获取当前时间
-    current_date = context.current_dt.date()
-    # 获取过去3年和5年的历史数据
-    hist3 = get_price(security, end_date=current_date, count=3*252, frequency='1d')
-    hist5 = get_price(security, end_date=current_date, count=5*252, frequency='1d')
+# 按天回测
+def handle_data(context, data):
+    log.info('调仓日期：%s' % context.current_dt.date())
+    security = g.security
+    # 获取股票的收盘价,df: 若是True, 返回[pandas.DataFrame], 否则返回一个dict
+    close_data = attribute_history(security, 1095, '1d', ['close'], df=False)
+    # print(f"close_data: {close_data}")
+    # 取得过去5天的平均价格，mean为均值函数，[-5:] 取出该列最后(最近)的5个元素
+    # ma5 = close_data['close'][-5:].mean()
+    # 取得上一时间点价格
+    current_price = close_data['close'][-1:]
+    log.info("current_price: %s" % (current_price))
 
-    # 计算3年和5年内的最高点和最低点
-    low3 = hist3['low'].min()
-    high3 = hist3['high'].max()
-    low5 = hist5['low'].min()
-    high5 = hist5['high'].max()
+    # last_price = close_data['close']['2023-10-13']
+    # log.info("last_price: %s" % (last_price))
+    # 取得过去3年的最低价格
+    min1095 = close_data['close'].min()
+    log.info("min1095: %s" % (min1095))
+    # 过去3年最高价格
+    max1095 = close_data['close'].max()
+    log.info("max1095: %s" % (max1095))
+    # 取得当前的现金
+    cash = context.portfolio.available_cash
 
-    # 获取当前价格
-    current_price = get_close_price(security, 1, '1m')
-    print("low3:{},high3:{},low5:{},high5:{},current_price:{}",low3,high3,low5,high5,current_price)
+    index_etf = '510310.XSHG'
 
-    # 根据价格决定交易策略
-    if current_price <= low3 and not traded_low3:
-        order_target_percent(security, 0.3)
-        traded_low3 = True
-    elif current_price <= low5 and not traded_low5:
-        order_target_percent(security, 1)
-        traded_low5 = True
-    elif current_price >= high3 and not traded_high3:
-        order_target_percent(security, 0.7)
-        traded_high3 = True
-    elif current_price >= high5 and not traded_high5:
-        order_target_percent(security, 0)
-        traded_high5 = True
+    # 小于三年最低价格，买入一半
+    if (current_price <= min1095):
+        # 用所有 cash 买入股票
+        order_value(index_etf, cash / 2)
+        # 记录这次买入
+        log.info("Buying %s" % (index_etf))
+    # 大于三年最高均线，卖出一半
+    elif current_price >= max1095:
+        # 卖出一半
+        # order_target(index_etf, 0)
+        sell_half_position(context, index_etf)
+        # 记录这次卖出
+        log.info("Selling %s" % (index_etf))
+    # 画出当前的价格
+    # record(current_price = data[security].price)
 
-# 获取收盘价
-def get_close_price(security, count, unit):
-    return attribute_history(security, count, unit, 'close',df=False)['close'][-1]
+
+# Assuming you are within the context of a JoinQuant strategy function
+
+# This function will sell half of the position for the given stock code
+def sell_half_position(context, stock_code):
+    # Get current positions
+    positions = context.portfolio.positions
+
+    # Check if the stock is in our positions
+    if stock_code in positions:
+        # Get the position for the given stock
+        position = positions[stock_code]
+
+        # Calculate the quantity to sell (half of the current position)
+        # Make sure to convert it to an integer, as you can't sell partial shares
+        quantity_to_sell = int(position.quantity / 2)
+
+        # Create a sell order for half the position
+        if quantity_to_sell > 0:
+            order = order_target_value(stock_code, position.market_value / 2)
+            if order:
+                print("Sold half of the position for stock:", stock_code)
+            else:
+                print("Order failed for stock:", stock_code)
+        else:
+            print("Not enough quantity to sell for stock:", stock_code)
+    else:
+        print("No position for stock:", stock_code)

@@ -1,9 +1,8 @@
-import pyautogui
 import time
 import logging
-import requests
 from subprocess import Popen
-import pywinctl as gw
+from pywinauto import Application, Desktop
+import requests
 
 # Configure logging
 log_file_path = "C:\\sci992_log\\logfile.log"
@@ -38,40 +37,42 @@ logging.info("0 - Script started")
 excel_file_path = "C:\\sci992\\ALL.xlsx"
 
 open_excel(excel_file_path)
-time.sleep(30)
-# time.sleep(180)
+# time.sleep(30)  # Give time for Excel to open
 logging.info("waiting for confirmation box activated")
 
-# Code to check the result and decide if Excel should be closed goes here
-window2 = gw.getWindowsWithTitle("提示")[0]
-window2.activate()
+# Connect to the Excel application
+app = Application(backend="uia").connect(path="excel.exe")
+
+# Access Excel's main window
+main_window = app.window(title_re=".*Excel.*")
+
+# Wait for the confirmation dialog to appear and interact with it
+# Assuming 'main_window' is the parent window
+confirmation_dialog = main_window.child_window(title="提示")
+confirmation_dialog.wait('visible', timeout=240)  # Wait for up to 240 seconds for the dialog
 logging.info("Confirmation box activated")
 
-pyautogui.press('esc')
-# pyautogui.hotkey('alt', '4')
+# Press 'ESC' button on the confirmation dialog
+confirmation_dialog.type_keys('{ESC}', with_spaces=True)
 logging.info("Confirmation box closed")
 
-# Activate Excel window
-window = gw.getWindowsWithTitle("ALL.xlsx - Excel")[0]
-window.activate()
+# Make sure the main Excel window is active
+main_window.set_focus()
 logging.info("Excel activated")
 
-time.sleep(3)
+time.sleep(2)
 # Send Ctrl+S to save
-pyautogui.hotkey('ctrl', 's')
+main_window.type_keys('^s', with_spaces=True)
 logging.info("Save command sent")
 
-time.sleep(5)
+time.sleep(2)
 logging.info("Waited for 5 seconds after save")
 
 # Close Excel window
-window.close()
+main_window.close()
 logging.info("Excel window closed")
 
 time.sleep(3)
 import_data_url = "http://127.0.0.1:8101/sci992/import?whetherCheck"
 logging.info("Attempting to execute import data command")
-# import_data(import_data_url)
-
-
-
+import_data(import_data_url)
