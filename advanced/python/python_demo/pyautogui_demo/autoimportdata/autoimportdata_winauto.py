@@ -1,8 +1,10 @@
+import sys
 import time
 import logging
 from subprocess import Popen
 from pywinauto import Application, Desktop
 import requests
+import psutil
 
 # Configure logging
 log_file_path = "C:\\sci992_log\\logfile.log"
@@ -14,6 +16,22 @@ logging.basicConfig(
         logging.StreamHandler()  # This adds the console handler
     ]
 )
+
+def is_excel_open(file_name):
+    # Check if there's any Excel process running
+    for proc in psutil.process_iter(['pid', 'name']):
+        if proc.info['name'] == 'EXCEL.EXE':
+            # If Excel is running, check if the specific file is open
+            try:
+                app = Application(backend="uia").connect(process=proc.pid)
+                if app.windows()[0].window_text().startswith(file_name):
+                    return True
+            # catch all exception
+            except Exception as e:
+                # Process does not exist or window not found
+                logging.error(f"Error: {e}")
+                pass
+    return False
 
 
 # Open Excel file using Popen
@@ -31,12 +49,18 @@ def import_data(url):
     except requests.exceptions.RequestException as e:
         logging.error(f"Error during HTTP request: {e}")
 
-
 # Main script execution
 logging.info("0 - Script started")
-excel_file_path = "C:\\sci992\\ALL.xlsx"
+excel_file_name = "ALL.xlsx"
+excel_file_path = f"C:\\sci992\\{excel_file_name}"
 
-open_excel(excel_file_path)
+# Check if Excel with ALL.xlsx is already open
+if is_excel_open(excel_file_name):
+    logging.info(f"{excel_file_name} is already open.")
+    sys.exit()
+else:
+    open_excel(excel_file_path)
+    # Rest of the script...
 # time.sleep(30)  # Give time for Excel to open
 logging.info("waiting for confirmation box activated")
 
