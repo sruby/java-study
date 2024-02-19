@@ -73,7 +73,12 @@ main_window = app.window(title_re=".*Excel.*")
 # Wait for the confirmation dialog to appear and interact with it
 # Assuming 'main_window' is the parent window
 confirmation_dialog = main_window.child_window(title="提示")
-confirmation_dialog.wait('visible', timeout=240)  # Wait for up to 240 seconds for the dialog
+try:
+    confirmation_dialog.wait('visible', timeout=240)  # Wait for up to 240 seconds for the dialog
+except TimeoutError:
+    # Handle the case where the dialog did not become visible within 240 seconds
+    print("The confirmation dialog did not appear within the allotted time.")
+
 logging.info("Confirmation box activated")
 
 # Press 'ESC' button on the confirmation dialog
