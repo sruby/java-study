@@ -3,6 +3,9 @@ def test():
     d1 = {'age':1,'name':'zhangsan'}
     print(d1['age'])
     print(d1['name'])
+    # put
+    d1['sex'] = 'male'
+    print(d1['sex'])
 
     d2 = dict({'age':1,'name':'zhangsan'})
     print(d2['age'])
