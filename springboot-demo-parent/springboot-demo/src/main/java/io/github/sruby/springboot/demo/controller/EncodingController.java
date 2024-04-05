@@ -22,4 +22,9 @@ public class EncodingController {
         model.addAttribute("name", name);
         return name;
     }
+    @RequestMapping(value = "/greeting2")
+    public String greeting()
+    {
+       return "{\"result\": \"hello world!\"}";
+    }
 }

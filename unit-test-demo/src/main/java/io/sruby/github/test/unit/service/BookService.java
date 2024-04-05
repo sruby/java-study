@@ -53,6 +53,19 @@ public class BookService extends ServiceImpl<BookMapper, Book> implements IBookS
         remove(new QueryWrapper<Book>().lambda().gt(Book::getId,0));
     }
 
+    /**
+     * demo for last in Oralce
+     * @return
+     */
+    public Book getOne(){
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<Book>()
+                .eq("", "")
+                .like("subject_text", ""+"%")
+                .orderByDesc("recive_date_time")
+                .last("FETCH NEXT 1 ROWS ONLY");
+        return bookMapper.selectOne(queryWrapper);
+    }
+
     @Override
     @Transactional
     public void deleteAllAndSaveBatch(ArrayList<Book> entityList) {
