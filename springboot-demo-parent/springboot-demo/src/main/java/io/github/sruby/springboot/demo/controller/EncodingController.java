@@ -20,6 +20,7 @@ public class EncodingController {
     {
         log.info("name:{}", name);
         model.addAttribute("name", name);
+
         return name;
     }
     @RequestMapping(value = "/greeting2")
