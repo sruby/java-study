@@ -14,4 +14,4 @@ def do_something_bad():
 try:
     do_something_bad()
 except MyCustomError as error:
-    print(error)  # This will print: Something bad happened!
+    print(error)  # This wi ll print: Something bad happened!
